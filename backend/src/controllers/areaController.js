@@ -33,13 +33,12 @@ const areaController = {
   async ler(req, res) {
     try {
       const { id } = req.params;
-        const users = await area.findOne({ where: { id } });
+      const users = await area.findOne({ where: { id } });
       // caso nao encotre o usuario
       if (!users) {
         return res.status(404).json({ message: "Àrea não encontrado" });
       }
-    return res.status(200).json(users);
-      
+      return res.status(200).json(users);
     } catch (err) {
       return res.status(400).send(err);
     }
@@ -53,31 +52,24 @@ const areaController = {
         return res.status(404).json({
           message: "Àrea não encontrado",
         });
+      } else if (await area.findOne({ where: { nome } })) {
+        return res.status(422).json({ message: `Àrea ${nome} já cadastrado` });
       } else {
-        await area.update(
-          { nome},
-          { where: { id } }
-        );
+        await area.update({ nome }, { where: { id } });
         return res.status(200).json({
-          message: "Area atualizado com suceso!",nome
+          message: "Area atualizado com suceso!",
+          nome,
         });
       }
-    } catch (err) {
-      // return res.status(400).send(err);
-      return res.status(500).json({ message: `Area já cadastrado`, err: err.parent.sqlMessage });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro ao atualizar área" });
     }
-    
   },
   async delete(req, res) {
     try {
       const { id } = req.params;
-      const user = await processo.findByPk(id);
-      if (!user) {
-        return res.status(422).json({ message: `Processo não encontrada` });
-      }
-     
-     
-      const rows = await area.findOne({ where: { id } });
+       const rows = await area.findByPk(id);
       if (!rows) {
         return res.status(400).json({
           message: "Àrea não encontrada",

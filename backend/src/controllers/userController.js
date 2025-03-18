@@ -1,29 +1,96 @@
-const User =require("../db/models/User")
-
+const user =require("../db/models/user")
+var bcrypt = require("bcrypt");
 const userController = {
 // 🔹 Criar um novo processo
 create:async (req, res) => {
-    try {
+   
+  
+  try {
     
-      const { nome, email } = req.body;
-      const novoProcesso = await User.create({ nome, email });
+      const { nome, email,password } = req.body;
+      const users = await user.findOne({ where: { email },where:{nome} });
+      if (users) {
+        return res.status(422).json({message: `Email ${email} ou nome ${nome} já cadastrado`});
+      }
+   
+      const novoProcesso = await user.create({ nome, email,password:bcrypt.genSaltSync(10) });
       res.status(201).json(novoProcesso);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Erro ao criar processo" });
+      res.status(500).json({ error:error.errors[0].message });
     }
   },
   // 🔹 Listar todos os processos com área associada
 listar: async (req, res) => {
     try {
-      const user = await User.findAll();
-      res.json(user);
+      const users = await user.findAll({
+        order: [["nome", "ASC"]],
+      });
+      res.json(users);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Erro ao buscar processos" });
     }
-  }
+  },
+  async ler(req, res) {
+    try {
+      const { id } = req.params;
+        const users = await user.findOne({ where: { id } });
+      // caso nao encotre o usuario
+      if (!users) {
+        return res.status(404).json({ message: "Usuario não encontrado" });
+      }
+    return res.status(200).json(users);
+      
+    } catch (err) {
+      return res.status(401).send({ err: err });
+    }
+  },
 
+  async update(req, res) {
+    try {
+      const { id } = req.params;
+      const { name,email, password } = req.body;
+      const users = await user.findOne({ where: { id } });
+      if (!users) {
+        return res.status(404).json({
+          message: "Usuario não encontrado",
+        });
+      } else {
+        await user.update(
+          { name,email, password:bcrypt.genSaltSync(10) },
+          { where: { id } }
+        );
+        return res.status(200).json({
+          message: "Usuario atualizado com suceso!",
+        });
+      }
+    } catch (err) {
+      // return res.status(400).send(err);
+      return res.status(500).json({ message: `Email já cadastrado`, err: err });
+    }
+    
+  },
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+
+      const rows = await user.findOne({ where: { id } });
+      if (!rows) {
+        return res.status(400).json({
+          message: "Usuário não encontrado",
+        });
+      } else {
+        await user.destroy({ where: { id } });
+
+        return res.status(200).json({
+          message: "Deletado com suceso!",
+        });
+      }
+    } catch (err) {
+      return res.status(500).send(err);
+    }
+  },
 }
 
 module.exports = userController;

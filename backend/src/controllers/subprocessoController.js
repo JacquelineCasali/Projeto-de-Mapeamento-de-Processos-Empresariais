@@ -59,7 +59,35 @@ if(!procesos){
     res.status(500).json({ error: "Erro ao buscar processos" });
   }
 },
-
+async update(req, res) {
+  try {
+    const { id } = req.params;
+    const { nome,
+      descricao,
+      processoId,
+      subprocessoId} = req.body;
+    const processos = await Subprocesso.findByPk( id );
+    // caso nao encotre o usuario
+    if (!processos) {
+      return res.status(404).json({ message: "Subporcesso não encontrado" });
+    }
+    else {
+      await Subprocesso.update(
+        {  nome,
+          descricao,
+          processoId,
+          subprocessoId},
+        { where: { id } }
+      );
+      return res.status(200).json({
+         message: "Subprocesso atualizado com suceso!"
+     });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: `Area não cadastrado, Cadastre uma área`, err: err.parent.sqlMessage });
+  }
+  
+},
 }
 
 module.exports = subprocessoController;
