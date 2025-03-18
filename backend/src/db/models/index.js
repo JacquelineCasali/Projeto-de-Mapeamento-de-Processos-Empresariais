@@ -1,15 +1,19 @@
+'use strict';
 const sequelize = require("../config/database");
-const Area = require("./Area");
-const Processo = require("./Processo");
-const Subprocesso = require("./Subprocesso");
+const User=require("./user")
+const area = require("./area");
+const processo = require("./processo");
+ const Subprocesso = require("./subprocesso");
 
 const syncDatabase = async () => {
   try {
-    await sequelize.sync({ alter: true });
+//verifica e cria a tabela
+await sequelize.sync({ alter: false });
     console.log("Banco de dados sincronizado!");
   } catch (error) {
     console.error("Erro ao sincronizar o banco:", error);
   }
 };
 
-module.exports = { sequelize, syncDatabase, Area, Processo, Subprocesso };
+module.exports = { sequelize, syncDatabase,User,area,
+  processo,Subprocesso };

@@ -1,0 +1,68 @@
+const {processo,area, Subprocesso }=require("../db/models")
+
+const processoController = {
+// 🔹 Criar um novo processo
+create:async (req, res) => {
+    try {
+   
+      const { nome, descricao,areaId } = req.body;
+      const areas = await area.findByPk(areaId)
+      if(!areas){
+        return res.status(422).json({message:`Àrea não encontrada`});
+      }
+      const novoProcesso = await processo.create({ nome, descricao, areaId });
+      res.status(201).json(novoProcesso);
+    } catch (err) {
+
+      return res.status(500).json({ message: `Verifique o dados` });
+    }
+  },
+  // 🔹 Listar todos os processos com subprocesso 
+listar: async (req, res) => {
+    try {
+      const processos = await processo.findAll({ include: area });
+      res.json(processos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro ao buscar processos" });
+    }
+  },
+  async ler(req, res) {
+    try {
+      const { id } = req.params;
+        const users = await processo.findOne({ where: { id },include:Subprocesso });
+      // caso nao encotre o usuario
+      if (!users) {
+        return res.status(404).json({ message: "Processo não encontrado" });
+      }
+    return res.status(200).json(users);
+      
+    } catch (err) {
+      return res.status(400).send(err);
+    }
+  }, 
+  async update(req, res) {
+    try {
+      const { id } = req.params;
+      const { nome, descricao,areaId } = req.body;
+      const processos = await processo.findOne({ where: { id } });
+      // caso nao encotre o usuario
+      if (!processos) {
+        return res.status(404).json({ message: "Processo não encontrado" });
+      }else {
+        await processo.update(
+          {  nome, descricao,areaId},
+          { where: { id } }
+        );
+        return res.status(200).json({
+           message: "Processo atualizado com suceso!"
+       });
+      }
+    } catch (err) {
+      return res.status(500).json({ message: `Area não cadastrado, Cadastre uma área`, err: err.parent.sqlMessage });
+    }
+    
+  },
+}
+
+module.exports = processoController;

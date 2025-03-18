@@ -5,10 +5,11 @@ const cors = require("cors");
 const cookieParser = require('cookie-parser')
 const path=require('path')
 const morgan = require("morgan");
-const {  syncDatabase } = require("./src/db/models");
+ const {syncDatabase } = require("./src/db/models");
+const router = require('./src/routes/routes');
 const app = express();
 
-// const usersRoutes=require('./src/routes/usersRoutes')
+
 app.use(cookieParser())
 
 app.use(cors());
@@ -23,11 +24,13 @@ app.use(express.static(path.join(__dirname,"public")));
 
 
 
-// app.use("/",usersRoutes)
-app.get("/", (req, res) => res.send("API rodando "));
+app.use(router);
+
+
+
 
 
 app.listen(port,async () => {
-  await syncDatabase();
+   await syncDatabase();
   console.log("Estamos rodando em: http://localhost:" + port );
 });

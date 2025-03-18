@@ -1,14 +1,21 @@
+'use strict';
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
-const Processo = require("./Processo");
+const processo = require("./processo");
 
 const Subprocesso = sequelize.define("Subprocesso", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   nome: { type: DataTypes.STRING, allowNull: false },
-  descricao: { type: DataTypes.TEXT },
+  descricao: { type: DataTypes.TEXT,allowNull:false },
+  processoId:{ type: DataTypes.INTEGER,allowNull: false },
+  subprocessoId:{ type: DataTypes.INTEGER }
 });
+processo.hasMany(Subprocesso,{foreignKey: "processoId",onDelete: "CASCADE"})
 
-Subprocesso.belongsTo(Processo, { foreignKey: "processo_id", onDelete: "CASCADE" });
-Subprocesso.belongsTo(Subprocesso, { foreignKey: "subprocesso_pai_id", onDelete: "CASCADE", as: "Pai" });
+
+Subprocesso.hasMany(Subprocesso,{foreignKey: "subprocessoId",as:"children"})
+
+Subprocesso.belongsTo(processo, { foreignKey: "processoId",onDelete: "CASCADE"});
+Subprocesso.belongsTo(Subprocesso, { foreignKey: "subprocessoId",  as: "parent"});
 
 module.exports = Subprocesso;

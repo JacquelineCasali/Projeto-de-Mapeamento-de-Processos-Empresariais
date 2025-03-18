@@ -1,13 +1,16 @@
+'use strict';
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
-const Area = require("./Area");
+const area = require("./area");
 
-const Processo = sequelize.define("Processo", {
+
+const processo = sequelize.define("Processo", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   nome: { type: DataTypes.STRING, allowNull: false },
-  descricao: { type: DataTypes.TEXT },
+  descricao: { type: DataTypes.TEXT,allowNull: false },
+  areaId:{ type: DataTypes.INTEGER ,allowNull: false}
 });
+area.hasMany(processo,{ foreignKey: "areaId",onDelete: "CASCADE",onUpdate:'CASCADE' })
+processo.belongsTo(area, { foreignKey: "areaId",onDelete: "CASCADE",onUpdate:'CASCADE' });
 
-Processo.belongsTo(Area, { foreignKey: "area_id", onDelete: "CASCADE" });
-
-module.exports = Processo;
+module.exports = processo;
