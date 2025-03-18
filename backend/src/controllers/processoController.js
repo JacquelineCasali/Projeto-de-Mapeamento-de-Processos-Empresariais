@@ -1,4 +1,5 @@
-const {processo,area, Subprocesso }=require("../db/models")
+const {processo,area, Subprocesso }=require("../db/models");
+
 
 const processoController = {
 // 🔹 Criar um novo processo
@@ -11,6 +12,7 @@ create:async (req, res) => {
         return res.status(422).json({message:`Àrea não encontrada`});
       }
       const novoProcesso = await processo.create({ nome, descricao, areaId });
+
       res.status(201).json(novoProcesso);
     } catch (err) {
 

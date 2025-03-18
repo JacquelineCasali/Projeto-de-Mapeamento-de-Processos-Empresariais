@@ -1,5 +1,6 @@
-const user =require("../db/models/user")
+
 var bcrypt = require("bcrypt");
+const user = require("../db/models/User");
 const userController = {
 
 create:async (req, res) => {
