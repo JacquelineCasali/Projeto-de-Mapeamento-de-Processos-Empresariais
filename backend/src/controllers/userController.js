@@ -1,10 +1,9 @@
 const user =require("../db/models/user")
 var bcrypt = require("bcrypt");
 const userController = {
-// 🔹 Criar um novo processo
+
 create:async (req, res) => {
    
-  
   try {
     
       const { nome, email,password } = req.body;
@@ -50,7 +49,7 @@ listar: async (req, res) => {
   async update(req, res) {
     try {
       const { id } = req.params;
-      const { name,email, password } = req.body;
+      const { nome,email, password } = req.body;
       const users = await user.findOne({ where: { id } });
       if (!users) {
         return res.status(404).json({
@@ -58,7 +57,7 @@ listar: async (req, res) => {
         });
       } else {
         await user.update(
-          { name,email, password:bcrypt.genSaltSync(10) },
+          { nome,email, password:bcrypt.genSaltSync(10) },
           { where: { id } }
         );
         return res.status(200).json({
