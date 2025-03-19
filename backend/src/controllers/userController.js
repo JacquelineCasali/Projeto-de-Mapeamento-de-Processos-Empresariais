@@ -1,6 +1,6 @@
 
 var bcrypt = require("bcrypt");
-const user = require("../db/models/User");
+const user = require("../db/models/user");
 const userController = {
 
 create:async (req, res) => {

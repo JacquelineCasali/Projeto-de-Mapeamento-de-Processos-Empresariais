@@ -5,18 +5,19 @@ const subprocessoController = require("../controllers/subprocessoController");
  const userController = require("../controllers/userController");
 const loginController = require("../controllers/loginController");
 const ValidateToken = require("../middlewares/token");
+const dashboardController = require("../controllers/dashboardController");
 
 const router = express.Router();
 router.post('/login',loginController.login)
 router.post('/user',userController.create)
 router.get('/user',userController.listar)
 
-router.get('/user/:id',ValidateToken, userController.ler)
+router.get('/user/:id', userController.ler)
 router.put("/user/:id",ValidateToken, userController.update);
 router.delete("/user/:id", userController.delete);
 
 router.post("/area", ValidateToken,areaController.create);
-router.get("/area", ValidateToken,areaController.listar);
+router.get("/area", areaController.listar);
 router.get("/area/:id",ValidateToken, areaController.ler);
 router.put("/area/:id",ValidateToken, areaController.update);
 router.delete("/area/:id", ValidateToken,areaController.delete);
@@ -31,4 +32,6 @@ router.get("/:processoId/subprocesso",ValidateToken, subprocessoController.lista
 router.get("/:processoId/subprocesso/:id", ValidateToken,subprocessoController.ler);
 router.put("/subprocesso/:id",ValidateToken, subprocessoController.update);
 
+
+router.get("/dashboard",dashboardController.listar)
 module.exports=router;

@@ -10,18 +10,18 @@ import { AuthContext } from "../../context/AuthContext";
 export default function Login() {
   //mostrar a senha
   const [isShow, setIsShow] = useState(false);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [message, setError] = useState<string>("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setError] = useState("");
 const auth=useContext(AuthContext)
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await api.post("/login", { email, password });
    auth.login(response.data.token)
-   navigate("/dashboard")
+   navigate("/processo")
     } catch (err) {
       setError("Login  Invalido");
       console.error("Login error:", err);

@@ -27,9 +27,9 @@
    border-radius: 10px;
    padding: 30px;
    gap: 40px;
- /* line-height: 24px; */
+
  width: 384px;
- height: 384px;
+
  }
 
 
@@ -42,7 +42,7 @@
    height: 50px;
   
    border-radius: 20px;
-   margin-top: 16px;
+   margin-top: 25px;
    color: #fff;
    background-color: rgb(13, 110, 253);
    cursor: pointer;
