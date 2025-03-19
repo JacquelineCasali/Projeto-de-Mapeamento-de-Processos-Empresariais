@@ -1,0 +1,154 @@
+.body{
+  /* background-color:rgb(5, 46, 22) ; */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  /* width: 100%; */
+
+ }
+ .form{
+  justify-content: center;
+  gap: 40px;
+ align-items: center;
+ display: flex;
+ flex-direction: column;
+ border:1px solid rgb(13, 110, 253);
+ border-radius: 10px;
+ 
+     /* margin: 15px 0; */
+   }
+   
+
+ .formulario-login{
+ 
+   background-color: #fff;
+   border-radius: 10px;
+   padding: 30px;
+   gap: 40px;
+ /* line-height: 24px; */
+ width: 384px;
+ height: 384px;
+ }
+
+
+
+  .btn-login{
+   text-align: center;
+   text-transform: uppercase;
+   font-weight: 600;
+   border: none;
+   height: 50px;
+  
+   border-radius: 20px;
+   margin-top: 16px;
+   color: #fff;
+   background-color: rgb(13, 110, 253);
+   cursor: pointer;
+   width: 330px;
+   
+  
+ }
+ 
+ 
+ 
+ 
+ .btn-login:hover  {
+     background-color: rgb(21 128 61);
+     transition: 0.5s;
+   }
+   
+   .btn-login:active{
+     background: black;
+   }
+   .input-senha{
+  /* position: relative; */
+  display: flex;
+  align-items: center;
+   }
+ .icon  {
+
+  margin:20px 0px 0px -40px;
+  display: inline;
+  outline: 2px solid transparent;
+  color:rgb(17, 24, 39) ;
+  opacity: 0.7;
+ }
+ /* .icon-button{
+all:unset;
+cursor: pointer;
+outline: 0;
+display: flex;
+align-items: center;
+color:rgb(17, 24, 39) ;
+
+outline-offset: 2px;
+outline: 2px solid transparent;
+margin:20px 0px 0px -40px;
+opacity: 0.7;
+
+ } */
+
+ /* .text-login{
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+margin-top: 16px;
+text-decoration-line:underline ;
+font-weight: 600;
+color:  rgb(20 83 45);
+line-height: 24px;
+font-size: 16px;
+} */
+
+
+
+.text-login:hover ,.text-esqueceu:hover {
+  color: rgb(22 163 74);
+  /* transition: 0.5s; */
+}
+ 
+
+
+
+ .text-esqueceu{
+  justify-content: flex-end;
+  display: flex;
+  margin-top: 16px;
+  text-decoration-line: underline;
+  font-weight: 500;
+  color: rgb(13, 110, 253);
+  line-height: 24px;
+  font-size: 16px;
+cursor: pointer;
+ }
+ .form-control{
+  padding: 12px;
+  margin-top: 16px;
+  color:rgb(17, 24, 39) ;
+  background-color:rgb(243 244 246) ;
+  /* width: 330px; */
+  outline-offset: 2px;
+  outline: 2px solid transparent;
+  /* border-radius: 10px;  */
+  opacity: 0.7;
+  
+  }
+
+
+  
+   /* responsividade */
+   @media (max-width: 480px) {
+    
+   }
+   
+   @media (max-width: 380px) {
+    
+   }
+   @media screen and (max-width:768px) {
+   }
+   
+       @media screen and (max-width: 1200px) {
+         }
