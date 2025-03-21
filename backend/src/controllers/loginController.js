@@ -1,53 +1,45 @@
-
-var bcrypt = require("bcrypt");
-const jwt= require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const { user } = require("../db/models");
 
-
 const loginController = {
-
-  
-
   //cadastrar
   async login(req, res) {
-   
-   
     const { email, password } = req.body;
     const users = await user.findOne({ where: { email } });
 
     if (!users) {
-      return res.status(422).json({message: `Email ${email} não encontrado` });
+      return res.status(422).json({ message: `Email ${email} não encontrado` });
     }
-    const salt = bcrypt.genSaltSync(10);
-    const userSenha = bcrypt.compare(salt, users.password);
 
-   if (!userSenha) {
-      return res.status(401).json({message: `Email ou senha não confere ` });
+    const userSenha = await bcrypt.compare(password, users.password);
+    if (!userSenha) {
+      return res.status(401).json({ message: `Email ou senha não confere ` });
     }
     //resgatando o id do usuario
-    const{id}=users;
+    const { id } = users;
     //expiresIn:300 expira em 5 minutos
-  const token= jwt.sign({id},
-    
-    process.env.APP_SECRET,{expiresIn:"1d"})
+    const token = jwt.sign(
+      { id },
 
-  res.cookie('token',token)
+      process.env.APP_SECRET,
+      { expiresIn: "1d" }
+    );
 
-     return res.json({
-      auth:true,
+    res.cookie("token", token);
+
+    return res.json({
+      auth: true,
       // message: 'logado com sucesso',
-      users:{
-        id, email
-       },
+      users: {
+        id,
+        email,
+      },
       token,
-      message:'Logado com sucesso'
-     }
-      
-     );
-  
+      message: "Logado com sucesso",
+    });
   },
 
   //cadastrar
-
 };
 module.exports = loginController;

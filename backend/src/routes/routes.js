@@ -17,7 +17,7 @@ router.put("/user/:id",ValidateToken, userController.update);
 router.delete("/user/:id", userController.delete);
 
 router.post("/area", ValidateToken,areaController.create);
-router.get("/area", areaController.listar);
+router.get("/area", ValidateToken,areaController.listar);
 router.get("/area/:id",ValidateToken, areaController.ler);
 router.put("/area/:id",ValidateToken, areaController.update);
 router.delete("/area/:id", ValidateToken,areaController.delete);

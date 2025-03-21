@@ -6,13 +6,14 @@ import Title from "../Title/Tlite";
 import "./login.css";
 import api from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
-
+import { toast } from "react-toastify"
 export default function Login() {
   //mostrar a senha
   const [isShow, setIsShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setError] = useState("");
+
+
 const auth=useContext(AuthContext)
   const navigate = useNavigate();
 
@@ -21,9 +22,11 @@ const auth=useContext(AuthContext)
     try {
       const response = await api.post("/login", { email, password });
    auth.login(response.data.token)
+toast.success(response.data.message)
    navigate("/processo")
-    } catch (err) {
-      setError("Login  Invalido");
+   
+  } catch (err) {
+    toast.error(err.response.data.message)
       console.error("Login error:", err);
     }
   };
@@ -79,17 +82,14 @@ const auth=useContext(AuthContext)
 
             <button className="btn-login">Login</button>
 
-            {message.length > 0 && (
-              <div className="alert alert-danger" role="alert">
-                {message}
-              </div>
-            )}
             <Link className="text-esqueceu" to="/cadastro">
               Crie Sua Conta
             </Link>
           </div>
         </form>
       </section>
+    
+
     </>
   );
 }

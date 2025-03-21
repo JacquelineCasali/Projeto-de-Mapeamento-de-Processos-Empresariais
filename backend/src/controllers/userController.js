@@ -1,5 +1,5 @@
 
-var bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const user = require("../db/models/user");
 const userController = {
 
@@ -12,8 +12,9 @@ create:async (req, res) => {
       if (users) {
         return res.status(422).json({message: `Email ${email} ou nome ${nome} já cadastrado`});
       }
-   
-      const novoProcesso = await user.create({ nome, email,password:bcrypt.genSaltSync(10) });
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword=await bcrypt.hash(password,salt);
+      const novoProcesso = await user.create({ nome, email,password:hashedPassword });
       res.status(201).json(novoProcesso);
     } catch (error) {
       console.error(error);
@@ -57,8 +58,10 @@ listar: async (req, res) => {
           message: "Usuario não encontrado",
         });
       } else {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword=await bcrypt.hash(password,salt)
         await user.update(
-          { nome,email, password:bcrypt.genSaltSync(10) },
+          { nome,email, password:hashedPassword },
           { where: { id } }
         );
         return res.status(200).json({

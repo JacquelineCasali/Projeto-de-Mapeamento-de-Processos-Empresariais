@@ -10,7 +10,7 @@ const areaController = {
       res.json(processos);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Erro ao buscar processos" });
+      res.status(500).json({ message: "Erro ao buscar processos" });
     }
   },
 

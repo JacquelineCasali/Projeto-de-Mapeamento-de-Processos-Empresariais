@@ -7,6 +7,10 @@
     font-family: "Poppins";
     /* overflow-x: hidden; */
   }
+  :root {
+    --toastify-color-dark: #121212;
+  }
+
   body {
     background-color: #f5f5f5;
     color: #333;
@@ -20,4 +24,10 @@
     background: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+  }
+
+  .Toastify__toast-container {
+  
+    --toastify-color-dark: #121212;
+  
   }
