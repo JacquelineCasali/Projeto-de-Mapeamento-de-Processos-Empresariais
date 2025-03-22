@@ -1,4 +1,4 @@
-const {Subprocesso, processo }=require("../db/models")
+const {subprocesso, processo }=require("../db/models")
 
 const subprocessoController = {
 // 🔹 Criar um novo processo
@@ -7,19 +7,17 @@ create:async (req, res) => {
      
       const { nome,
         descricao,
-        processoId,
-        subprocessoId} = req.body;
+        processoId
+        } = req.body;
 
         const procesos = await processo.findByPk(processoId)
         if(!procesos){
           return res.status(422).json({message:`Processo não encontrada`});
         }
+        const novoProcesso = await subprocesso.create({ nome, descricao, processoId });
 
-      const subprocesso = await Subprocesso.create({ nome,
-        descricao,
-        processoId,
-        subprocessoId });
-      res.status(201).json(subprocesso);
+        res.status(201).json(novoProcesso);
+      
     } catch (error) {
       console.error(error);
       res.status(500).json({ error:error.message });
@@ -28,15 +26,8 @@ create:async (req, res) => {
  // 🔹 Listar todos os subprocessos de um processo
  listar: async (req, res) => {
   try {
-const {processoId}=req.params;
-
-const procesos = await processo.findByPk(processoId)
-if(!procesos){
-  return res.status(422).json({message:`Processo não encontrada`});
-}
-
-    const processos = await processo.findByPk(processoId,{ include: Subprocesso });
-    res.json(processos);
+    const subprocessos = await subprocesso.findAll();
+    res.json(subprocessos);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Erro ao buscar processos" });
@@ -47,12 +38,12 @@ ler: async (req, res) => {
   try {
 const {id}=req.params;
 
-const procesos = await Subprocesso.findOne({ where: { id } });
+const procesos = await subprocesso.findOne({ where: { id } });
 if(!procesos){
   return res.status(422).json({message:`Subporcesso não encontrada`});
 }
 
-    const processos = await Subprocesso.findOne({ where: { id } });
+    const processos = await subprocesso.findOne({ where: { id } });
     res.json(processos);
   } catch (error) {
     console.error(error);
@@ -64,19 +55,19 @@ async update(req, res) {
     const { id } = req.params;
     const { nome,
       descricao,
-      processoId,
-      subprocessoId} = req.body;
-    const processos = await Subprocesso.findByPk( id );
+      processoId
+      } = req.body;
+    const processos = await subprocesso.findByPk( id );
     // caso nao encotre o usuario
     if (!processos) {
       return res.status(404).json({ message: "Subporcesso não encontrado" });
     }
     else {
-      await Subprocesso.update(
+      await subprocesso.update(
         {  nome,
           descricao,
-          processoId,
-          subprocessoId},
+          processoId
+          },
         { where: { id } }
       );
       return res.status(200).json({

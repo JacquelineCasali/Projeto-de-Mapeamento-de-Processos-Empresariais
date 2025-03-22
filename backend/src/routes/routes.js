@@ -1,18 +1,18 @@
 const express = require("express");
-const processoController = require("../controllers/ProcessoController");
 const areaController = require("../controllers/areaController");
 const subprocessoController = require("../controllers/subprocessoController");
  const userController = require("../controllers/userController");
 const loginController = require("../controllers/loginController");
 const ValidateToken = require("../middlewares/token");
 const dashboardController = require("../controllers/dashboardController");
+const processoController = require("../controllers/processoController");
 
 const router = express.Router();
 router.post('/login',loginController.login)
 router.post('/user',userController.create)
 router.get('/user',userController.listar)
 
-router.get('/user/:id', userController.ler)
+router.get('/user/:id',ValidateToken, userController.ler)
 router.put("/user/:id",ValidateToken, userController.update);
 router.delete("/user/:id", userController.delete);
 
@@ -28,8 +28,8 @@ router.get("/processo/:id",ValidateToken, processoController.ler);
 router.put("/processo/:id",ValidateToken, processoController.update);
 
 router.post("/subprocesso",ValidateToken, subprocessoController.create);
-router.get("/:processoId/subprocesso",ValidateToken, subprocessoController.listar);
-router.get("/:processoId/subprocesso/:id", ValidateToken,subprocessoController.ler);
+router.get("/subprocesso",ValidateToken, subprocessoController.listar);
+router.get("/subprocesso/:id", ValidateToken,subprocessoController.ler);
 router.put("/subprocesso/:id",ValidateToken, subprocessoController.update);
 
 

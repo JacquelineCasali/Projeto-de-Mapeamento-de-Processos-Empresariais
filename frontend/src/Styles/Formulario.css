@@ -32,16 +32,3 @@
     border-radius: 5px;
   }
   
-  .btn-submit {
-    width: 100%;
-    padding: 10px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .btn-submit:hover {
-    background: #0056b3;
-  }

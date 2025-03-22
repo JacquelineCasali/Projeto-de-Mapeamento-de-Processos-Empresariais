@@ -1,4 +1,4 @@
-const { area, user, processo, Subprocesso } = require("../db/models");
+const { area, user, processo, subprocesso } = require("../db/models");
 
 const dashboardController = {
     // 🔹 Listar todos as areas
@@ -6,7 +6,7 @@ const dashboardController = {
       try {
         const totalUser = await user.count();
         const totalProcesso=await processo.count();
-        const totalSubprocesso=await Subprocesso.count();
+        const totalSubprocesso=await subprocesso.count();
         res.json({totalUser,totalProcesso,totalSubprocesso});
       } catch (error) {
         console.error(error);

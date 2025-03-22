@@ -1,4 +1,5 @@
-const {processo,area, Subprocesso }=require("../db/models");
+
+const {processo,area, subprocesso }=require("../db/models");
 
 
 const processoController = {
@@ -20,11 +21,11 @@ create:async (req, res) => {
     }
   },
   // 🔹 Listar todos os processos com subprocesso 
-listar: async (req, res) => {
+  listar: async (req, res) => {
     try {
       const {areaId } = req.query;
       const filtros = areaId ? { where: { areaId } } : {};
-      const processos = await processo.findAll({...filtros, include:[{model:area},{model:Subprocesso
+      const processos = await processo.findAll({...filtros, include:[{model:area},{model:subprocesso
         
       }]  });
       res.json(processos);
@@ -33,10 +34,11 @@ listar: async (req, res) => {
       res.status(500).json({ error: "Erro ao buscar processos" });
     }
   },
+  //filtar por processo
   async ler(req, res) {
     try {
       const { id } = req.params;
-        const users = await processo.findOne({ where: { id },include:Subprocesso });
+        const users = await processo.findOne({ where: { id },include:subprocesso });
       // caso nao encotre o usuario
       if (!users) {
         return res.status(404).json({ message: "Processo não encontrado" });

@@ -7,6 +7,7 @@ import "./login.css";
 import api from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify"
+import Button from "../Button/Button";
 export default function Login() {
   //mostrar a senha
   const [isShow, setIsShow] = useState(false);
@@ -22,7 +23,6 @@ const auth=useContext(AuthContext)
     try {
       const response = await api.post("/login", { email, password });
    auth.login(response.data.token)
-toast.success(response.data.message)
    navigate("/processo")
    
   } catch (err) {
@@ -80,7 +80,11 @@ toast.success(response.data.message)
               Esqueceu sua senha?
             </Link>
 
-            <button className="btn-login">Login</button>
+        
+
+         <Button text={"Login"} theme={"roxo"}
+          
+         />
 
             <Link className="text-esqueceu" to="/cadastro">
               Crie Sua Conta

@@ -8,6 +8,7 @@ import api from "../services/api";
 import Title from "../components/Title/Tlite";
 import { Head } from "../components/Head/Head";
 import { toast } from "react-toastify";
+import Button from "../components/Button/Button";
 
 const CadastroUsuario = () => {
   const [isShow, setIsShow] = useState(false);
@@ -157,10 +158,14 @@ const CadastroUsuario = () => {
             )}
           </div>
 
+ <Button text=  {id ? "Editar" : "Cadastrar"} 
 
-              <button className="btn-login" type="submit">
-              {id ? "Editar" : "Cadastrar"}
-          </button> 
+ theme={"roxo"}
+ type="submit"
+ 
+          
+         />
+          
 
         
 

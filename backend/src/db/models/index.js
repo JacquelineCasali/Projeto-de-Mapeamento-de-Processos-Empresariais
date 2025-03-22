@@ -3,7 +3,7 @@ const sequelize = require("../config/database");
 const user=require("./user")
 const area = require("./area");
 const processo = require("./processo");
- const Subprocesso = require("./subprocesso");
+ const subprocesso = require("./subprocesso");
 
 const syncDatabase = async () => {
   try {
@@ -16,4 +16,4 @@ await sequelize.sync({ alter: false });
 };
 
 module.exports = { sequelize, syncDatabase,user,area,
-  processo,Subprocesso };
+  processo,subprocesso };

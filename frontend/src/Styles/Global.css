@@ -1,5 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+:root {
+  --primary: #118c4f;
+  --branco: #FFFFFF;
+  --roxo: #581C87;
+  --azul:rgb(13, 110, 253);
+  --roxoClaro:#7E22CE;
+  --black:#0F172A;
+--amarelo:#FCD34D;
+--marron: #D97706;
+
+--sm:14px;
+--m:16px;
+--xm:18px;
+--lg:20px;
+--xl:24px;
+--tr:32px;
+--f:40px;
+--ls:56px;
+
+
+
+
+}
+
+
 * {
     padding: 0;
     margin: 0;
@@ -7,9 +32,7 @@
     font-family: "Poppins";
     /* overflow-x: hidden; */
   }
-  :root {
-    --toastify-color-dark: #121212;
-  }
+
 
   body {
     background-color: #f5f5f5;
@@ -26,8 +49,4 @@
     border-radius: 8px;
   }
 
-  .Toastify__toast-container {
-  
-    --toastify-color-dark: #121212;
-  
-  }
+ 

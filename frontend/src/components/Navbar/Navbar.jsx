@@ -3,6 +3,8 @@
 import { useContext } from "react";
 import "./navbar.css"
 import { AuthContext } from "../../context/AuthContext";
+import Button from "../Button/Button";
+import { Link } from "react-router-dom";
 
 
 
@@ -25,7 +27,40 @@ export default function Navbar() {
 <h1>Stage Consulting
 
 </h1>
-<button className="btn" onClick={handleLogout}>Sair</button>
+
+  <ul>
+  Área
+  <li>
+    <Link to="/cadastro/area">Cadastrar</Link>
+    </li>
+    <li>
+    <Link to={`/cadastro/area`}>Editar</Link>
+    </li>
+    </ul>
+ 
+  
+    <ul>
+  Processo
+  <li>
+  <Link to="/cadastro/processo">Cadastro</Link>
+    </li>
+  </ul>
+ 
+
+<ul>
+Subprocesso
+<li>
+  <Link to="/cadastro/subprocesso">Cadastro</Link>
+    </li>
+</ul>
+
+
+ 
+
+<button className="btn" 
+style={{width:"80px"}}
+onClick={handleLogout}>Sair</button>
+
 
 </nav>
  
