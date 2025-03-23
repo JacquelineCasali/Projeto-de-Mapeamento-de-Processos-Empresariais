@@ -7,10 +7,10 @@ export default function Button(props) {
     <button className={`${"btn"} ${props.theme === "amarelo" ?  "amarelo" : "roxo" }`}>
      {props.text}
   
-          <TiArrowRight
+          {/* <TiArrowRight
         size={34}
         
-      />
+      /> */}
           </button>
   )
 }

@@ -8,6 +8,8 @@ const subprocesso = sequelize.define("Subprocesso", {
   nome: { type: DataTypes.STRING, allowNull: false },
   descricao: { type: DataTypes.TEXT, allowNull: false },
   processoId: { type: DataTypes.INTEGER, allowNull: false },
+
+
 });
 processo.hasMany(subprocesso, {
   foreignKey: "processoId",
@@ -18,5 +20,6 @@ subprocesso.belongsTo(processo, {
   foreignKey: "processoId",
   onDelete: "CASCADE",
 });
+
 
 module.exports = subprocesso;

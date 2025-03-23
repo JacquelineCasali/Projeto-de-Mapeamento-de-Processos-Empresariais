@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import Title from "../Title/Tlite";
 import Button from "../Button/Button";
+import AreaList from "../Area/AreaDetalhe";
+import AreaDetalhe from "../Area/AreaDetalhe";
 
 const FormularioProcesso = () => {
   const navigate = useNavigate();
@@ -115,11 +117,11 @@ const FormularioProcesso = () => {
                 }
               >
                 <option value="">Selecione uma área</option>
-                {areas.map((area) => (
-                  <option key={area.id} value={area.id}>
-                    {area.nome}
-                  </option>
-                ))}
+                       {areas.map((area) => (
+                    <AreaDetalhe 
+                    key={area.id}
+                    area={area}/>
+                        ))}
               </select>
             </div>
    <Button text={id ? "Editar" : "Cadastrar"} theme={"roxo"}

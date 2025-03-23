@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import Title from "../Title/Tlite";
 import Button from "../Button/Button";
+import ProcessoDetalhe from "../Processo/ProcessoDetalhe";
 
 const FormularioSubprocesso = () => {
   const navigate = useNavigate();
@@ -117,7 +118,9 @@ const FormularioSubprocesso = () => {
                 <option value="">Selecione um processo</option>
                 {processo.map((p) => (
                   <option key={p.id} value={p.id}>
-                    {p.nome}
+               <ProcessoDetalhe
+               processo={processo}
+               />
                   </option>
                 ))}
               </select>

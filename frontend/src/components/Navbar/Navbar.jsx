@@ -1,21 +1,24 @@
 
 
-import { useContext } from "react";
+import { useContext} from "react";
 import "./navbar.css"
 import { AuthContext } from "../../context/AuthContext";
-import Button from "../Button/Button";
+
 import { Link } from "react-router-dom";
 
 
 
 
+
 export default function Navbar() {
-   const {logout} = useContext(AuthContext)
+
+  const {logout} = useContext(AuthContext)
+   
   const handleLogout= ()=>{
     console.log('sair')
     logout();
   }
-  
+ 
 
   
    
@@ -34,7 +37,7 @@ export default function Navbar() {
     <Link to="/cadastro/area">Cadastrar</Link>
     </li>
     <li>
-    <Link to={`/cadastro/area`}>Editar</Link>
+    <Link to={`/cadastro/area/`}>Editar</Link>
     </li>
     </ul>
  

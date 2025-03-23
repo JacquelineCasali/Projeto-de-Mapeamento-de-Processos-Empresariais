@@ -26,7 +26,9 @@ create:async (req, res) => {
  // 🔹 Listar todos os subprocessos de um processo
  listar: async (req, res) => {
   try {
-    const subprocessos = await subprocesso.findAll();
+    const {processoId } = req.query;
+    const filtros = processoId ? { where: { processoId } } : {};
+    const subprocessos = await subprocesso.findAll({...filtros,include:[{model:processo}] });
     res.json(subprocessos);
   } catch (error) {
     console.error(error);

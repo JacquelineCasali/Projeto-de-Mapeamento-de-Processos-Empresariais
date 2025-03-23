@@ -5,6 +5,7 @@ const area = require("./area");
 const processo = require("./processo");
  const subprocesso = require("./subprocesso");
 
+
 const syncDatabase = async () => {
   try {
 //verifica e cria a tabela

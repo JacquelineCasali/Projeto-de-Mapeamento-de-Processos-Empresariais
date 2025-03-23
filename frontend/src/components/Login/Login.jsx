@@ -82,7 +82,9 @@ const auth=useContext(AuthContext)
 
         
 
-         <Button text={"Login"} theme={"roxo"}
+         <Button text={"Login"}
+      type="submit"
+         theme={"roxo"}
           
          />
 

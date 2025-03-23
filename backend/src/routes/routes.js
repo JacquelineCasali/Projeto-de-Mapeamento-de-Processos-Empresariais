@@ -12,8 +12,8 @@ router.post('/login',loginController.login)
 router.post('/user',userController.create)
 router.get('/user',userController.listar)
 
-router.get('/user/:id',ValidateToken, userController.ler)
-router.put("/user/:id",ValidateToken, userController.update);
+router.get('/user/:id', ValidateToken,userController.ler)
+router.put("/user/:id", userController.update);
 router.delete("/user/:id", userController.delete);
 
 router.post("/area", ValidateToken,areaController.create);

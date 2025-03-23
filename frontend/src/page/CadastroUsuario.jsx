@@ -18,7 +18,7 @@ const CadastroUsuario = () => {
   // const navigate = useNavigate();
   const navigate = useNavigate();
   const { id } = useParams();
-  const token = localStorage.getItem("token");
+
   const [values, setValues] = useState({
     nome: "",
     email: "",
@@ -29,7 +29,13 @@ const CadastroUsuario = () => {
     //  banco de dados
 
     try {
-      api.get(`/user/` + id).then((res) => {
+      api.get(`/user/` + id,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+        
+      ).then((res) => {
         setValues(res.data);
         toast.error(res.data.message);
       });
@@ -51,9 +57,11 @@ const CadastroUsuario = () => {
 
       const response =
         id > 0
-          ? await api.put(`/user/` + id, values, {
-              headers: { Authorization: `Bearer ${token}` },
-            })
+          ? await api.put(`/user/` + id, values,{
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
           : await api.post("/user", values);
 
       if (response.data) {
@@ -158,13 +166,13 @@ const CadastroUsuario = () => {
             )}
           </div>
 
- <Button text=  {id ? "Editar" : "Cadastrar"} 
+          <Button text=  {id ? "Editar" : "Cadastrar"} 
 
- theme={"roxo"}
- type="submit"
- 
-          
-         />
+theme={"roxo"}
+type="submit"
+
+         
+        />
           
 
         
