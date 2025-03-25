@@ -26,7 +26,7 @@ router.post("/processo",ValidateToken, processoController.create);
 router.get("/processo", ValidateToken,processoController.listar);
 router.get("/processo/:id",ValidateToken, processoController.ler);
 router.put("/processo/:id",ValidateToken, processoController.update);
-
+router.delete("/processo/:id", ValidateToken,processoController.delete);
 router.post("/subprocesso",ValidateToken, subprocessoController.create);
 router.get("/subprocesso",ValidateToken, subprocessoController.listar);
 router.get("/subprocesso/:id", ValidateToken,subprocessoController.ler);

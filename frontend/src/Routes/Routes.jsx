@@ -3,63 +3,78 @@ import LoginPage from "../page/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 
 import AuthProvider from "../context/AuthContext";
-import CadastroUsuario from "../page/CadastroUsuario"
+import CadastroUsuario from "../page/CadastroUsuario";
 import ProcessoPage from "../page/Processo/ProcessoPage";
 import SubprocessoPage from "../page/Subprocesso/SubprocessoPage";
+import Home from "../page/Home";
 
-
-
-
-
-
+import Area from "../page/Area/Area";
+import AreaPage from "../page/Area/AreaPage";
+import Processo from "../page/Processo/Processo";
+import CardProvider from "../context/CardContext";
+import Subprocesso from "../page/Subprocesso/Subprocesso";
 
 const AppRoutes = () => {
   return (
     <Router>
-        <AuthProvider>
+      <AuthProvider>
+        <CardProvider>
+        <Routes>
+          <Route path="/" element={
+            <PrivateRoute>
+            <Home />
+            </PrivateRoute>
+            }>
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <ProcessoPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="subprocesso"
+              element={
+                <PrivateRoute>
+                  <SubprocessoPage />
+                </PrivateRoute>
+              }
+            />
+              <Route
+              path="area"
+              element={
+                <PrivateRoute>
+                  <AreaPage/>
+                </PrivateRoute>
+              }
+            />
+          </Route>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/cadastro" element={<CadastroUsuario />} />
 
-      
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/cadastro" element={<CadastroUsuario />} />
-       
-        
-        <Route path="/edit/:id" element={
-           <PrivateRoute>
-          <CadastroUsuario />
-          </PrivateRoute>
-          }
-          
-           />
-
-        <Route path="/processo" element={
-           <PrivateRoute>
-<ProcessoPage />
-</PrivateRoute>
-          }
-          
-          />
-              <Route path="/subprocesso" element={
+          <Route
+            path="/edit/:id"
+            element={
               <PrivateRoute>
-<SubprocessoPage />
-              </PrivateRoute> 
-          }
-          
+                <CadastroUsuario />
+              </PrivateRoute>
+            }
           />
-        
-           {/* <Route path="/cadastro/processo" element={<Processo />} />
 
+           <Route path="/cadastrar/processo" element={<Processo />} />
+           <Route path="/cadastrar/processo/:id" element={<Processo />} />
  
-        <Route path="/cadastro/area" element={<Area />} />
-        <Route path="/cadastro/area/:id" element={<Area />} />
+   <Route path="/cadastrar/area" element={<Area />} />
+        <Route path="/cadastrar/area/:id" element={<Area />} />
 
       
       
-        <Route path="/cadastro/processo/edit/:id" element={<Processo />} />
-        <Route path="/cadastro/subprocesso" element={<Subprocesso />} />
-        <Route path="/cadastro/subprocesso/edit/:id" element={<Subprocesso />} />
+       
+        <Route path="/cadastrar/subprocesso" element={<Subprocesso />} />
+        <Route path="/cadastrar/subprocesso/edit/:id" element={<Subprocesso />} />
     
-        <Route path="/subprocesso/edit/:id" element={<Subprocesso />} />
+        <Route path="/cadastrar/edit/:id" element={<Subprocesso />} />
 
 
     
@@ -67,8 +82,10 @@ const AppRoutes = () => {
   
     
        
-          */}
-      </Routes>
+          
+        </Routes>
+        </CardProvider>
+       
       </AuthProvider>
     </Router>
   );

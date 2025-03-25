@@ -18,11 +18,9 @@ const login=(token)=>{
 }
 const logout=()=>{
   api.defaults.headers.Authorization=null
- 
-  setToken(null)
+   setToken(null)
   localStorage.removeItem('token')
- 
-  navigate("/")
+   navigate("/login")
 }
 return (
       <AuthContext.Provider value={{user,setUser,token,login,logout}}>

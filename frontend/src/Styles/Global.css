@@ -39,7 +39,8 @@
     color: #333;
   }
 
-  .container {
+  .main{
+    padding:15px   32px 32px 32px ;
     width: 80%;
     max-width: 1200px;
     margin: 20px auto;
@@ -48,5 +49,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
   }
+
+
 
  

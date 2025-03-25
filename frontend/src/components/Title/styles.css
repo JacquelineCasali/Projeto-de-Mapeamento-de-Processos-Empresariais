@@ -1,4 +1,4 @@
-.h1{
+.h1-title{
    color: #000;
   font-weight: 600;
   line-height: 32px;
@@ -6,15 +6,11 @@
   opacity: 0.8;
   font-family: sans-serif;
 }
-.h1-login{
-  margin: 50px 0;
-   color: #000;
-   font-weight: 600;
-   line-height: 32px;
-   font-size: 24px;
-   display: flex;
+.h1{
+ 
+ 
+    display: flex;
    justify-content: center;
-   font-family: sans-serif;
    opacity: 0.8;
 }
 

@@ -1,51 +1,16 @@
-import { useEffect, useState } from "react";
-
+import { useState,useContext } from "react";
 import "./processo.css";
-
-import { getAreas, getProcessosPorArea } from "../../services/processoService";
-import { Link } from "react-router-dom";
-import { FiChevronUp, FiChevronDown } from "react-icons/fi";
+import { getProcessosPorArea } from "../../services/processoService";
+import { useNavigate } from "react-router-dom";
 import AreaDetalhe from "../Area/AreaDetalhe";
 import ProcessoDetalhe from "./ProcessoDetalhe";
-
 import Loading from "../Loading/Loading";
 import Title from "../Title/Tlite";
-import { toast } from "react-toastify";
-import api from "../../services/api";
+import { CardContext } from "../../context/CardContext";
 const Processo = () => {
-  const [areas, setAreas] = useState([]);
   const [areaSelecionada, setAreaSelecionada] = useState("");
-  const [processos, setProcessos] = useState([]);
-  
-  useEffect(() => {
-    //  banco de dados
-
-    try {
-      api
-        .get(`/processo/`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        })
-        .then((res) => {
-          setProcessos(res.data);
-        });
-    } catch (err) {
-      console.error(err);
-      toast.error(err.response.data.message);
-    
-    }
-  }, []);
-
-  useEffect(() => {
-    const fetchAreas = async () => {
-      try {
-        const data = await getAreas();
-        setAreas(data);
-      } catch (error) {
-        console.error("Erro ao buscar áreas", error);
-      }
-    };
-    fetchAreas();
-  }, []);
+  const {dados, setProcessos,areas} = useContext(CardContext);
+  const navigate = useNavigate();
 
   const handleSelectArea = async (event) => {
     const areaId = event.target.value;
@@ -55,18 +20,19 @@ const Processo = () => {
       try {
         const data = await getProcessosPorArea(areaId);
         setProcessos(data);
-         } catch (error) {
+      } catch (error) {
         console.error("Erro ao buscar processos", error);
       }
     } else {
       setProcessos([]);
     }
   };
+  function ClickEdit(id) {
+    navigate("/cadastrar/processo/" + id);
+  }
 
   return (
     <div className="container">
-      <Link to="/cadastro/processo">Cadastrar Processo</Link>
-
       <div className="form-group">
         <Title text="Filtrar processos Por Àrea" theme={"h2"} />
         <select value={areaSelecionada} onChange={handleSelectArea}>
@@ -78,15 +44,15 @@ const Processo = () => {
       </div>
       <Title text="Lista de Processos" theme={"h2"} />
 
-      {processos.length === 0 ? (
+      {dados.length === 0 ? (
         <Loading />
       ) : (
-        processos.map((processo) => (
-         
-            <ProcessoDetalhe key={processo.id} processo={processo} />
-           
+        dados.map((processo) => (
+          <ProcessoDetalhe key={processo.id} processo={processo}
+            clickEdit={ClickEdit} 
+
           
-         
+              />
         ))
       )}
     </div>

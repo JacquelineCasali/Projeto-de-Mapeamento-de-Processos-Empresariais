@@ -25,7 +25,10 @@ create:async (req, res) => {
     try {
       const {areaId } = req.query;
       const filtros = areaId ? { where: { areaId } } : {};
-      const processos = await processo.findAll({...filtros, include:[{model:area},{model:subprocesso
+      const processos = await processo.findAll({...filtros, include:[{model:area,
+        attributes: ['id', 'nome'] 
+
+      },{model:subprocesso
         
       }]  });
       res.json(processos);
@@ -38,7 +41,7 @@ create:async (req, res) => {
   async ler(req, res) {
     try {
       const { id } = req.params;
-        const users = await processo.findOne({ where: { id },include:subprocesso });
+        const users = await processo.findOne({ where: { id },include:subprocesso ,include:area});
       // caso nao encotre o usuario
       if (!users) {
         return res.status(404).json({ message: "Processo não encontrado" });
@@ -71,6 +74,29 @@ create:async (req, res) => {
     }
     
   },
+  
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+
+      const rows = await processo.findOne({ where: { id } });
+      if (!rows) {
+        return res.status(400).json({
+          message: "Processo não encontrado",
+        });
+      } else {
+        await processo.destroy({ where: { id } });
+
+        return res.status(200).json({
+          message: "Deletado com suceso!",
+        });
+      }
+    } catch (err) {
+      return res.status(500).send(err);
+    }
+  },
 }
+
+
 
 module.exports = processoController;

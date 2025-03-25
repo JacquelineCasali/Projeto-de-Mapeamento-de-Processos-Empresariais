@@ -74,10 +74,10 @@ cursor: pointer;
   
   color:rgb(17, 24, 39) ;
   background-color:rgb(243 244 246) ;
-  /* width: 330px; */
+
   outline-offset: 2px;
   outline: 2px solid transparent;
-  /* border-radius: 10px;  */
+
   opacity: 0.7;
   
   }

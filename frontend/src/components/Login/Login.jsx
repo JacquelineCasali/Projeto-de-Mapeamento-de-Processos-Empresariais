@@ -8,6 +8,7 @@ import api from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify"
 import Button from "../Button/Button";
+import { Head } from "../Head/Head";
 export default function Login() {
   //mostrar a senha
   const [isShow, setIsShow] = useState(false);
@@ -23,7 +24,7 @@ const auth=useContext(AuthContext)
     try {
       const response = await api.post("/login", { email, password });
    auth.login(response.data.token)
-   navigate("/processo")
+   navigate("/")
    
   } catch (err) {
     toast.error(err.response.data.message)
@@ -32,6 +33,7 @@ const auth=useContext(AuthContext)
   };
   return (
     <>
+    <Head title={"Login"}/>
       <section className="body">
         <form onSubmit={handleLogin} className="form">
           <div className="formulario-login">
@@ -45,6 +47,7 @@ const auth=useContext(AuthContext)
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                autoComplete="email"
               />
               <MdOutlineEmail className="icon text-secondary" />
             </div>

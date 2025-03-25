@@ -5,18 +5,16 @@ import { toast } from "react-toastify";
 import api from "../../services/api";
 import Title from "../Title/Tlite";
 import Button from "../Button/Button";
-import AreaList from "../Area/AreaDetalhe";
+
 import AreaDetalhe from "../Area/AreaDetalhe";
 
 const FormularioProcesso = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-
   const [areas, setAreas] = useState([]);
 
   useEffect(() => {
-    api
-      .get("/area", {
+    api.get("/area", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((response) => setAreas(response.data))
@@ -32,8 +30,7 @@ const FormularioProcesso = () => {
     //  banco de dados
 
     try {
-      api
-        .get(`/processo/` + id, {
+      api.get(`/processo/` + id, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
         .then((res) => {
@@ -55,6 +52,8 @@ const FormularioProcesso = () => {
         toast.error("selecione uma área");
         return;
       }
+
+      
       const response =
         id > 0
           ? await api.put(`/processo/` + id, values, {
@@ -69,7 +68,7 @@ const FormularioProcesso = () => {
             });
 
       if (response.data) {
-        navigate("/processo");
+        navigate("/");
         window.location.reload();
         console.log(response.data);
       }

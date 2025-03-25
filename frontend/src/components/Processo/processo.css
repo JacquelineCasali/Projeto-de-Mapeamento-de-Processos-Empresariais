@@ -16,17 +16,18 @@
   margin-bottom: 15px;
   border-radius: 5px;
 }
-
-.subprocessos-container ul {
-  list-style-type: none;
-  padding: 0;
+.subprocesso-card {
+  background:var(--branco);
+  padding: 15px;
+  border-left: 5px solid var(--primary);
+  margin-bottom: 15px;
+  border-radius: 5px;
 }
-
-.subprocessos-container li {
-  padding: 5px;
-  background: #e9ecef;
-  margin: 5px 0;
-  border-radius: 3px;
+.subprocesso{
+  background:var(--branco);
+  padding: 20px ;
+  font-size: 18px;
+  border-radius: 20px;
 }
 .btn-toggle {
   background: #007bff;
@@ -42,17 +43,39 @@
   background: #0056b3;
 }
 
-.subprocessos-container ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.subprocessos-container li {
-  padding: 5px;
-  background: #e9ecef;
-  margin: 5px 0;
-  border-radius: 3px;
-}
 .menu-sections{
   display: flex;
+}
+.btn-cadastro{
+  background-color: #0275d8;
+  color: white;
+  font-weight: bold;
+ 
+  bottom: 100px;
+ 
+  transition: all 0.1s linear 0.1s;
+ 
+  padding: 12px;
+  border-radius: 20px;
+font-size: 18px;
+
+
+text-decoration: none;
+display: flex;
+justify-content: center;
+}
+
+.btn-cadastro:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 7px 0px;
+  transform: scale(1.1);
+}
+.section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cabecalho{
+  display: inline-flex  ;
+      gap: 10px;
+      flex-direction: row-reverse;
 }
