@@ -4,6 +4,7 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 import SubrocessoDetalhe from "./SubrocessoDetalhe";
 import Title from "../Title/Tlite";
+import { Link } from "react-router-dom";
 
 const Subrocesso = ({ processoId }) => {
   const [subprocessos, setSubprocessos] = useState([]);
@@ -31,27 +32,27 @@ const Subrocesso = ({ processoId }) => {
 
   return (
     <div className="subprocesso-list">
-          {subprocessos.length === 0 ?"":
-          <Title text="Subprocesso" theme={"h1"} />
-          
-          } 
-   
-      <div>
-        {subprocessos.length === 0 ? (
-      
-       
-           <p className="subprocesso">Este processo não possui subprocessos.</p>
-       
-           
-        ) : (
-          subprocessos.map((subprocesso) => (
-            <SubrocessoDetalhe
-            key={subprocesso.id}
-            subprocesso={subprocesso}/>
-       
-          ))
-        )}
-      </div>
+      {subprocessos.length === 0 ? (
+        ""
+      ) : (
+        <Title text="Subprocesso" theme={"h1"} />
+      )}
+
+      {subprocessos.length === 0 ? (
+        <p className="subprocesso">
+          Este processo não possui subprocessos.
+          <br />
+          <Link to="/cadastrar/subprocesso">
+            {" "}
+            Cadastre aqui um subprocesso{" "}
+          </Link>
+        </p>
+      ) : (
+        subprocessos.map((subprocesso) => (
+          <SubrocessoDetalhe key={subprocesso.id} subprocesso={subprocesso}
+          />
+        ))
+      )}
     </div>
   );
 };

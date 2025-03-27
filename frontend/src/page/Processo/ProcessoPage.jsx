@@ -1,12 +1,12 @@
 
-import { Link } from "react-router-dom";
 
-import { IoMdAdd } from "react-icons/io";
 import Processo from "../../components/Processo/Processo";
 import Title from "../../components/Title/Tlite";
 import { useContext } from "react";
 import { CardContext } from "../../context/CardContext";
 import Search from "../../components/Search/Search"
+import { NavLink } from "react-router-dom";
+import { IoMdAdd } from "react-icons/io";
 
 
 export default function ProcessoPage() {
@@ -22,15 +22,15 @@ export default function ProcessoPage() {
     <Title text="Processos" theme="h1"/>
 
    <div className="cabecalho">
-   <Link 
+   <NavLink to="/cadastrar/processo"
         className="btn-cadastro" 
-        to={`/cadastrar/processo`}>
+        >
                 <IoMdAdd
               size={25}
              cursor="pointer"
         />
         Cadastro
-                </Link>
+                </NavLink>
                 <Search busca={busca} setBusca={setBusca}/> 
    </div>
   

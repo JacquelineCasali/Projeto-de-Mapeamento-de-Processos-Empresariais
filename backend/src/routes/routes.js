@@ -6,6 +6,8 @@ const loginController = require("../controllers/loginController");
 const ValidateToken = require("../middlewares/token");
 const dashboardController = require("../controllers/dashboardController");
 const processoController = require("../controllers/processoController");
+const upload = require("../middlewares/upload");
+const downloadController = require("../controllers/downloadController");
 
 const router = express.Router();
 router.post('/login',loginController.login)
@@ -22,16 +24,19 @@ router.get("/area/:id",ValidateToken, areaController.ler);
 router.put("/area/:id",ValidateToken, areaController.update);
 router.delete("/area/:id", ValidateToken,areaController.delete);
 
-router.post("/processo",ValidateToken, processoController.create);
+router.post("/processo",ValidateToken,upload.single('documentacao'), processoController.create);
 router.get("/processo", ValidateToken,processoController.listar);
 router.get("/processo/:id",ValidateToken, processoController.ler);
-router.put("/processo/:id",ValidateToken, processoController.update);
+router.patch("/processo/:id",ValidateToken, upload.single('documentacao'),processoController.update);
 router.delete("/processo/:id", ValidateToken,processoController.delete);
 router.post("/subprocesso",ValidateToken, subprocessoController.create);
 router.get("/subprocesso",ValidateToken, subprocessoController.listar);
 router.get("/subprocesso/:id", ValidateToken,subprocessoController.ler);
 router.put("/subprocesso/:id",ValidateToken, subprocessoController.update);
+router.delete("/subprocesso/:id", ValidateToken,subprocessoController.delete);
 
 
 router.get("/dashboard",dashboardController.listar)
+router.get("/download/:filename", downloadController.ler);
+
 module.exports=router;

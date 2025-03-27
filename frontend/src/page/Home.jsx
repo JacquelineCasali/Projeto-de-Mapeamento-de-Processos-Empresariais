@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from '../components/Navbar/Navbar';
 
 
-export default function Home(onLogout) {
+export default function Home({onLogout}) {
 
   return (
     <>
@@ -15,4 +15,3 @@ export default function Home(onLogout) {
     </>
   )
 }
-

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../Styles/Formulario.css";
 import { toast } from "react-toastify";
@@ -7,24 +7,26 @@ import Title from "../Title/Tlite";
 import Button from "../Button/Button";
 
 import AreaDetalhe from "../Area/AreaDetalhe";
+import { CardContext } from "../../context/CardContext";
 
 const FormularioProcesso = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [areas, setAreas] = useState([]);
+  const {areas} = useContext(CardContext);
 
-  useEffect(() => {
-    api.get("/area", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      .then((response) => setAreas(response.data))
-      .catch(() => toast.error("Error ao conectar banco de dados"));
-  }, []);
+  // useEffect(() => {
+  //   api.get("/area", {
+  //       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  //     })
+  //     .then((response) => setAreas(response.data))
+  //     .catch(() => toast.error("Error ao conectar banco de dados"));
+  // }, []);
 
   const [values, setValues] = useState({
     nome: "",
     descricao: "",
     areaId: "",
+    responsavel:""
   });
   useEffect(() => {
     //  banco de dados
@@ -75,7 +77,6 @@ const FormularioProcesso = () => {
     } catch (err) {
       console.error(err);
       toast.error(err.response.data.message);
-      // alert("Usuario já cadastrada");
     }
   }
 
@@ -97,6 +98,16 @@ const FormularioProcesso = () => {
               />
             </div>
             <div className="form-group">
+              <input
+                type="text"
+                className="form-control  text-secondary"
+                placeholder="Responsáveis"
+                value={values.responsavel}
+                onChange={(e) => setValues({ ...values, responsavel: e.target.value })}
+                required
+              />
+            </div>
+            <div className="form-group">
               <label>Descrição:</label>
               <textarea
                 value={values.descricao}
@@ -104,7 +115,7 @@ const FormularioProcesso = () => {
                   setValues({ ...values, descricao: e.target.value })
                 }
                 placeholder="Descreva a descrição do processo"
-                required
+           
               />
             </div>
             <div className="form-group">

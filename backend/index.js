@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended:true}));
 
 //resposta no console sobre a aplicação
 app.use(morgan("dev"));
-//acessando a imagem 
+//acessando o arquivo 
 app.use(express.static(path.join(__dirname,"public")));
 
 

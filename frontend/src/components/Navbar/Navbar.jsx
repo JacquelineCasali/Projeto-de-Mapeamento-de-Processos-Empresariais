@@ -2,7 +2,7 @@ import { useContext } from "react";
 import "./navbar.css";
 import { AuthContext } from "../../context/AuthContext";
 
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const { logout } = useContext(AuthContext);
@@ -17,13 +17,14 @@ export default function Navbar() {
       <nav>
         <h1>Stage Consulting</h1>
         <div className="ul">
+        <ul>
+            <Link to="/">Processo</Link>
+          </ul>
           <ul>
             <NavLink to="area">Área</NavLink>
           </ul>
 
-          <ul>
-            <NavLink to="/">Processo</NavLink>
-          </ul>
+        
 
           <ul>
             <NavLink to="subprocesso">Subprocesso</NavLink>

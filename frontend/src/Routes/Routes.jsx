@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router,  Routes,Route } from "react-router-dom";
 import LoginPage from "../page/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 
@@ -6,26 +6,38 @@ import AuthProvider from "../context/AuthContext";
 import CadastroUsuario from "../page/CadastroUsuario";
 import ProcessoPage from "../page/Processo/ProcessoPage";
 import SubprocessoPage from "../page/Subprocesso/SubprocessoPage";
-import Home from "../page/Home";
 
 import Area from "../page/Area/Area";
 import AreaPage from "../page/Area/AreaPage";
 import Processo from "../page/Processo/Processo";
 import CardProvider from "../context/CardContext";
 import Subprocesso from "../page/Subprocesso/Subprocesso";
+import Home from "../page/Home";
+import Cadastro from "../page/Cadastro";
 
 const AppRoutes = () => {
   return (
     <Router>
       <AuthProvider>
         <CardProvider>
+           
         <Routes>
-          <Route path="/" element={
+        <Route exact path="/login" element={<LoginPage />} />
+        <Route exact path="/cadastro" element={<CadastroUsuario />} />
+        <Route exact
+            path="/edit/:id"
+            element={
+              <PrivateRoute>
+                <CadastroUsuario />
+              </PrivateRoute>
+            }
+          />
+          <Route  exact path="/" element={
             <PrivateRoute>
             <Home />
             </PrivateRoute>
             }>
-            <Route
+            <Route 
               path="/"
               element={
                 <PrivateRoute>
@@ -33,7 +45,7 @@ const AppRoutes = () => {
                 </PrivateRoute>
               }
             />
-            <Route
+            <Route 
               path="subprocesso"
               element={
                 <PrivateRoute>
@@ -41,7 +53,7 @@ const AppRoutes = () => {
                 </PrivateRoute>
               }
             />
-              <Route
+              <Route 
               path="area"
               element={
                 <PrivateRoute>
@@ -50,32 +62,51 @@ const AppRoutes = () => {
               }
             />
           </Route>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/cadastro" element={<CadastroUsuario />} />
 
-          <Route
-            path="/edit/:id"
-            element={
+          <Route path="/cadastrar" element={<Cadastro />} >
+
+        </Route>
+
+         
+
+           <Route exact path="/cadastrar/processo" element={
               <PrivateRoute>
-                <CadastroUsuario />
+ <Processo />
               </PrivateRoute>
-            }
-          />
-
-           <Route path="/cadastrar/processo" element={<Processo />} />
-           <Route path="/cadastrar/processo/:id" element={<Processo />} />
+           } />
+           <Route exact path="/cadastrar/processo/:id" element={
+              <PrivateRoute>
+  <Processo />
+              </PrivateRoute>
+          } />
  
-   <Route path="/cadastrar/area" element={<Area />} />
-        <Route path="/cadastrar/area/:id" element={<Area />} />
+   <Route path="/cadastrar/area" element={
+      <PrivateRoute>
+  <Area />
+      </PrivateRoute>
+  } />
+        <Route path="/cadastrar/area/:id" element={
+              <PrivateRoute>
+ <Area />
+              </PrivateRoute>
+         } />
 
       
       
        
-        <Route path="/cadastrar/subprocesso" element={<Subprocesso />} />
-        <Route path="/cadastrar/subprocesso/edit/:id" element={<Subprocesso />} />
+        <Route path="/cadastrar/subprocesso" element={
+            <PrivateRoute>
+  <Subprocesso />
+            </PrivateRoute>
+        } />
+        <Route path="/cadastrar/subprocesso/:id" element={
+                    <PrivateRoute>
+                    <Subprocesso />
+                              </PrivateRoute>
+          
+          } />
     
-        <Route path="/cadastrar/edit/:id" element={<Subprocesso />} />
-
+       
 
     
     

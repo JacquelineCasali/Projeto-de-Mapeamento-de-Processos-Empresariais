@@ -27,7 +27,7 @@ const areaController = {
       res.status(201).json(newArea);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Erro ao criar processo" });
+      res.status(500).json({ error:error.errors[0].message });
     }
   },
   async ler(req, res) {

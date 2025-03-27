@@ -7,7 +7,7 @@ const user = sequelize.define("User", {
   nome: { type: DataTypes.STRING, allowNull: false, unique:true,
     validate:{
       notEmpty:{
-        msg:"Esse campo não pode ser vazio"
+        msg:"Campo nome não pode ser vazio"
       },
     }  
    },

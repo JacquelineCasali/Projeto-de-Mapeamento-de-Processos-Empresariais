@@ -1,28 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../Styles/Formulario.css";
 import { toast } from "react-toastify";
 import api from "../../services/api";
 import Title from "../Title/Tlite";
 import Button from "../Button/Button";
-import ProcessoDetalhe from "../Processo/ProcessoDetalhe";
+import { CardContext } from "../../context/CardContext";
+
 
 const FormularioSubprocesso = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [processo, setSubprocesso] = useState([]);
+  const {dados} = useContext(CardContext);
 
-  useEffect(() => {
-    api
-      .get("/processo", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      .then((response) => setSubprocesso(response.data))
-      .catch(() => toast.error("Error ao conectar banco de dados"));
-  }, []);
-
-  const [values, setValues] = useState({
+ const [values, setValues] = useState({
     nome: "",
     descricao: "",
     processoId: "",
@@ -68,7 +60,7 @@ const FormularioSubprocesso = () => {
             });
 
       if (response.data) {
-        navigate("/processo");
+        navigate("/");
         window.location.reload();
         console.log(response.data);
       }
@@ -116,11 +108,9 @@ const FormularioSubprocesso = () => {
                 }
               >
                 <option value="">Selecione um processo</option>
-                {processo.map((p) => (
+                {dados.map((p) => (
                   <option key={p.id} value={p.id}>
-               <ProcessoDetalhe
-               processo={processo}
-               />
+                    {p.nome}
                   </option>
                 ))}
               </select>

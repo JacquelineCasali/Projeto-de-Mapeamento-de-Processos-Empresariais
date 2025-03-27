@@ -50,7 +50,7 @@ export default function FormularioArea() {
             });
 
       if (response.data) {
-        navigate("/processo");
+        navigate("/");
 
         console.log(response.data);
       }

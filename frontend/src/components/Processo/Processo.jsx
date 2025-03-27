@@ -4,7 +4,6 @@ import { getProcessosPorArea } from "../../services/processoService";
 import { useNavigate } from "react-router-dom";
 import AreaDetalhe from "../Area/AreaDetalhe";
 import ProcessoDetalhe from "./ProcessoDetalhe";
-import Loading from "../Loading/Loading";
 import Title from "../Title/Tlite";
 import { CardContext } from "../../context/CardContext";
 const Processo = () => {
@@ -33,28 +32,28 @@ const Processo = () => {
 
   return (
     <div className="container">
-      <div className="form-group">
+    
+       <div className="form-group">
         <Title text="Filtrar processos Por Àrea" theme={"h2"} />
-        <select value={areaSelecionada} onChange={handleSelectArea}>
+    <select value={areaSelecionada} onChange={handleSelectArea}>
           <option value="">Selecione uma Área</option>
           {areas.map((area) => (
+                
             <AreaDetalhe key={area.id} area={area} />
           ))}
-        </select>
+        </select> 
       </div>
       <Title text="Lista de Processos" theme={"h2"} />
 
       {dados.length === 0 ? (
-        <Loading />
+   <p>Sem Processo cadastrado nessa área</p>
       ) : (
         dados.map((processo) => (
           <ProcessoDetalhe key={processo.id} processo={processo}
             clickEdit={ClickEdit} 
-
-          
               />
         ))
-      )}
+      )} 
     </div>
   );
 };

@@ -31,7 +31,7 @@ export default function CardProvider({ children }) {
 
     try {
       api
-        .get(`/area/`, {
+        .get(`/area`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
         .then((res) => {
@@ -48,12 +48,13 @@ export default function CardProvider({ children }) {
 
     try {
       api
-        .get(`/processo/`, {
+        .get(`/processo`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
 
         .then((res) => {
           setProcessos(res.data);
+     
         });
     } catch (err) {
       console.error(err);

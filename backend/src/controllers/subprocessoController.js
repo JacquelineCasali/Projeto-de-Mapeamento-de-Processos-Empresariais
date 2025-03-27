@@ -81,6 +81,26 @@ async update(req, res) {
   }
   
 },
+async delete(req, res) {
+  try {
+    const { id } = req.params;
+
+    const rows = await subprocesso.findOne({ where: { id } });
+    if (!rows) {
+      return res.status(400).json({
+        message: "SubProcesso não encontrado",
+      });
+    } else {
+      await subprocesso.destroy({ where: { id } });
+
+      return res.status(200).json({
+        message: "Deletado com suceso!",
+      });
+    }
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+},
 }
 
 module.exports = subprocessoController;

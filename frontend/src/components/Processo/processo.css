@@ -16,6 +16,11 @@
   margin-bottom: 15px;
   border-radius: 5px;
 }
+.processo-detalhe{
+  display: inline-flex;
+  gap: 10px;
+}
+
 .subprocesso-card {
   background:var(--branco);
   padding: 15px;
