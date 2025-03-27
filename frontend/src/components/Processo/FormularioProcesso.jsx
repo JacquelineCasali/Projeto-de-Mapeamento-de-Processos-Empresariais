@@ -13,27 +13,33 @@ const FormularioProcesso = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const {areas} = useContext(CardContext);
+const header={
+ 'headers':{
+    'Content-Type':'multipart/form-data',
 
-  // useEffect(() => {
-  //   api.get("/area", {
-  //       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-  //     })
-  //     .then((response) => setAreas(response.data))
-  //     .catch(() => toast.error("Error ao conectar banco de dados"));
-  // }, []);
+  } 
+    }
+
+
+
 
   const [values, setValues] = useState({
     nome: "",
     descricao: "",
+    responsavel:"",
     areaId: "",
-    responsavel:""
+    ferramentas:"",
+    documentacao:""
   });
   useEffect(() => {
     //  banco de dados
+//     //criando objeto com os dados
 
     try {
       api.get(`/processo/` + id, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}`
+     
+        },
         })
         .then((res) => {
           setValues(res.data);
@@ -55,18 +61,20 @@ const FormularioProcesso = () => {
         return;
       }
 
-      
+      const formData=new FormData();
+  
       const response =
         id > 0
-          ? await api.put(`/processo/` + id, values, {
+          ? await api.patch(`/processo/` + id, values,{
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
+               },header,
             })
           : await api.post("/processo", values, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
+              
+              },header,
             });
 
       if (response.data) {
@@ -134,6 +142,21 @@ const FormularioProcesso = () => {
                         ))}
               </select>
             </div>
+
+<input type="text"
+ className="form-control  text-secondary"
+ placeholder="ferramenta"
+ autoComplete="ferramentas"
+ value={values.ferramentas}
+ onChange={(e) => setValues({ ...values, ferramentas: e.target.value })}
+/>
+<input type="file"
+ className="form-control  text-secondary"
+ placeholder="Responsáveis"
+//  value={values.documentacao.files}
+ onChange={(e) => setValues({ ...values, documentacao: e.target.files[0] })}
+/>
+
    <Button text={id ? "Editar" : "Cadastrar"} theme={"roxo"}
    type="submit" />
                 </form>

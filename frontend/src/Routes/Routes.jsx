@@ -13,7 +13,7 @@ import Processo from "../page/Processo/Processo";
 import CardProvider from "../context/CardContext";
 import Subprocesso from "../page/Subprocesso/Subprocesso";
 import Home from "../page/Home";
-import Cadastro from "../page/Cadastro";
+
 
 const AppRoutes = () => {
   return (
@@ -63,9 +63,6 @@ const AppRoutes = () => {
             />
           </Route>
 
-          <Route path="/cadastrar" element={<Cadastro />} >
-
-        </Route>
 
          
 

@@ -26,7 +26,7 @@ create:async (req, res) => {
       res.status(201).json(novoProcesso);
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ error:error.errors});
+      res.status(500).json({ error:error.errors[0].message });
     }
   },
   // 🔹 Listar todos os processos com subprocesso 

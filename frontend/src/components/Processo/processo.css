@@ -84,3 +84,11 @@ justify-content: center;
       gap: 10px;
       flex-direction: row-reverse;
 }
+.detalhes{
+display: flex;
+justify-content: space-between;
+}
+/* .lado-esquerdo{
+  display: flex;
+  flex-direction: column;
+} */

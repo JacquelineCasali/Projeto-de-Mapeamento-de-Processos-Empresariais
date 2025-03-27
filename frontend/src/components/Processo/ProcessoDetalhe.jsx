@@ -8,7 +8,7 @@ import api from "../../services/api";
 import { CardContext } from "../../context/CardContext";
 
 export default function ProcessoDetalhe({ processo ,clickEdit}) {
-  const { nome, descricao, id,responsavel} = processo;
+  const { nome, descricao, id,responsavel,ferramentas,documentacao} = processo;
 
 
   const [selectedProcesso, setSelectedProcesso] = useState(null);
@@ -43,7 +43,10 @@ export default function ProcessoDetalhe({ processo ,clickEdit}) {
   
     <div className="processo-card">
         <h2>{nome}</h2>
-        <div className="processo-detalhe">
+    
+    <div className="detalhes">
+
+<div className="processo-detalhe">
         <strong>Descrição do Processo:</strong>
         <p>{descricao}</p>
 
@@ -52,7 +55,19 @@ export default function ProcessoDetalhe({ processo ,clickEdit}) {
         <strong>Responsável:</strong>
         <p> {responsavel}</p>
         </div>
-  
+
+</div>
+
+        <div className="processo-detalhe">
+        <strong>Ferramentas:</strong>
+        <p> {ferramentas}</p>
+        </div>
+        <div className="processo-detalhe">
+        <strong>Documentação:</strong>
+        <p> {documentacao}</p>
+        </div>
+       
+
         <div
           className="menu-sections"
           onClick={() => handleSelectProcesso(processo.id)}
