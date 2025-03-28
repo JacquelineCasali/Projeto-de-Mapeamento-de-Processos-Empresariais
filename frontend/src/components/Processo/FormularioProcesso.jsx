@@ -13,14 +13,6 @@ const FormularioProcesso = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const {areas} = useContext(CardContext);
-const header={
- 'headers':{
-    'Content-Type':'multipart/form-data',
-
-  } 
-    }
-
-
 
 
   const [values, setValues] = useState({
@@ -61,20 +53,21 @@ const header={
         return;
       }
 
-      const formData=new FormData();
+    
   
       const response =
         id > 0
-          ? await api.patch(`/processo/` + id, values,{
+          ? await api.put(`/processo/` + id, values,{
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-               },header,
+                'Content-Type':'multipart/form-data',
+               }
             })
           : await api.post("/processo", values, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-              
-              },header,
+              'Content-Type':'multipart/form-data',
+              },
             });
 
       if (response.data) {
@@ -150,12 +143,22 @@ const header={
  value={values.ferramentas}
  onChange={(e) => setValues({ ...values, ferramentas: e.target.value })}
 />
+
+<div>
 <input type="file"
  className="form-control  text-secondary"
  placeholder="Responsáveis"
-//  value={values.documentacao.files}
  onChange={(e) => setValues({ ...values, documentacao: e.target.files[0] })}
 />
+<p>{values.documentacao}</p> 
+</div>
+
+{/* <input type="file"
+ className="form-control  text-secondary"
+ placeholder="Responsáveis"
+
+ onChange={(e) => setValues({ ...values, documentacao: e.target.files[0] })}
+/> */}
 
    <Button text={id ? "Editar" : "Cadastrar"} theme={"roxo"}
    type="submit" />

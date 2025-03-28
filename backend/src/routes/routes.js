@@ -27,7 +27,7 @@ router.delete("/area/:id", ValidateToken,areaController.delete);
 router.post("/processo",ValidateToken,upload.single('documentacao'), processoController.create);
 router.get("/processo", ValidateToken,processoController.listar);
 router.get("/processo/:id",ValidateToken, processoController.ler);
-router.patch("/processo/:id",ValidateToken, upload.single('documentacao'),processoController.update);
+router.put("/processo/:id",ValidateToken, upload.single('documentacao'),processoController.update);
 router.delete("/processo/:id", ValidateToken,processoController.delete);
 router.post("/subprocesso",ValidateToken, subprocessoController.create);
 router.get("/subprocesso",ValidateToken, subprocessoController.listar);

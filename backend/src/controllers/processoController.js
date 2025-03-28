@@ -35,7 +35,11 @@ create:async (req, res) => {
       const {areaId } = req.query;
       const filtros = areaId ? { where: { areaId} } : {};
      
-      const processos = await processo.findAll({...filtros,
+      const processos = await processo.findAll(
+        
+        {  order: [["id", "DESC"]],
+          
+          ...filtros,
          include:[{model:area,
         attributes: ['id', 'nome']},
         {model:subprocesso,attributes: ['id', 'nome','descricao','processoId'] }

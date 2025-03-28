@@ -6,6 +6,7 @@ import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import Modal from "../Modal/Modal";
 import api from "../../services/api";
 import { CardContext } from "../../context/CardContext";
+import { Link } from "react-router-dom";
 
 export default function ProcessoDetalhe({ processo ,clickEdit}) {
   const { nome, descricao, id,responsavel,ferramentas,documentacao} = processo;
@@ -35,7 +36,7 @@ export default function ProcessoDetalhe({ processo ,clickEdit}) {
   };
   
 
- 
+
 
   return (
     <>
@@ -57,8 +58,8 @@ export default function ProcessoDetalhe({ processo ,clickEdit}) {
         </div>
 
 </div>
-
-        <div className="processo-detalhe">
+<div className="detalhes-inferior">
+<div className="processo-detalhe">
         <strong>Ferramentas:</strong>
         <p> {ferramentas}</p>
         </div>
@@ -66,6 +67,8 @@ export default function ProcessoDetalhe({ processo ,clickEdit}) {
         <strong>Documentação:</strong>
         <p> {documentacao}</p>
         </div>
+</div>
+       
        
 
         <div

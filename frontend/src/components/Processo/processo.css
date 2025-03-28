@@ -88,6 +88,10 @@ justify-content: center;
 display: flex;
 justify-content: space-between;
 }
+.detalhes-inferior{
+  display: flex;
+ flex-direction: column;
+  }
 /* .lado-esquerdo{
   display: flex;
   flex-direction: column;

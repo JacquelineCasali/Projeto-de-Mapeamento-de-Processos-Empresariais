@@ -18,7 +18,7 @@ module.exports = (multer({
         // Nome que deve ser atribuido ao arquivo
         filename: (req, file, cb) => {
             crypto.randomBytes(5, (err, hash) => {
-                file.image = `${hash.toString("hex")}-${file.originalname}`;
+                file.image = `${file.originalname}`;
   
                 cb(null, file.image);  
             })
