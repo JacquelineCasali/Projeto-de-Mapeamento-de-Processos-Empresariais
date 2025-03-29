@@ -1,43 +1,116 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./navbar.css";
 import { AuthContext } from "../../context/AuthContext";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FiChevronDown } from "react-icons/fi";
 
 export default function Navbar() {
   const { logout } = useContext(AuthContext);
-
-  const handleLogout = () => {
-    console.log("sair");
-    logout();
+  const [menuAberto, setMenuAberto] = useState({
+    areas: false,
+    processos: false,
+    subprocessos: false,
+  });
+  const toggleMenu = (menu) => {
+    setMenuAberto((prev) => ({
+      ...prev,
+      [menu]: !prev[menu],
+    }));
   };
-
+ 
   return (
     <header className="header">
-      <nav>
-        <h1>Stage Consulting</h1>
-        <div className="ul">
-        <ul>
-            <Link to="/">Processo</Link>
-          </ul>
-          <ul>
-            <NavLink to="area">Área</NavLink>
-          </ul>
+      <nav className="nav-bar">
+        <h2>Gestão de Processo</h2>
+ 
+       
+        <ul className="navLinks">
+   
+          <li className="dropdown"
+            >
+            <Link to="/"
+            className="link"
+            >Processo</Link>
+             <FiChevronDown
+              onClick={()=>toggleMenu('processos')}
+               size={26}
+               cursor={"pointer"}
+               color="#4F372F"
+             />
+              {  menuAberto.processos&& 
+              <ul className="dropdownContent">
+  <li>
+      <Link to="/cadastrar/processo"
+      className="link"
+      >Cadastro</Link>
+    </li>
+              </ul>
 
-        
 
-          <ul>
-            <NavLink to="subprocesso">Subprocesso</NavLink>
-          </ul>
-        </div>
+          }
+          </li>
+          <li className="dropdown"
+            >
+            <Link to="area"
+            className="link"
+            >Área</Link>
+ <FiChevronDown
+            onClick={()=>toggleMenu('areas')}
+               size={26}
+               cursor={"pointer"}
+               color="#4F372F"
+             />
+              {  menuAberto.areas&& 
+              <ul className="dropdownContent">
+  <li>
+      <Link to="/cadastrar/area"
+      className="link"
+      >Cadastro</Link>
+    </li>
+              </ul>
 
-        <button
-          className="btn"
-          style={{ width: "80px" }}
-          onClick={handleLogout}
-        >
+
+          }
+
+
+          </li>
+          <li className="dropdown"
+            >
+            <Link to="subprocesso"
+            className="link"
+            >Subprocesso</Link>
+
+<FiChevronDown
+                onClick={()=>toggleMenu('subprocessos')}
+               size={26}
+               cursor={"pointer"}
+               color="#4F372F"
+             />
+              {  menuAberto.subprocessos&& 
+              <ul className="dropdownContent">
+  <li >
+      <Link to="/cadastrar/subprocesso"
+      className="link"
+      >Cadastro</Link>
+    </li>
+              </ul>
+
+
+          }
+          </li>
+
+ 
+
+ 
+
+        </ul>
+
+
+        <button className="logout" style={{ width: "80px" }} onClick={logout}>
           Sair
         </button>
+     
       </nav>
     </header>
   );
