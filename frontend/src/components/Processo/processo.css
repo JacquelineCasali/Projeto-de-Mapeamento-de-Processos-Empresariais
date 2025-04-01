@@ -1,9 +1,16 @@
+
+.processos-container{
+  display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 10px;
+}
+
 .form-group {
   margin-bottom: 15px;
 }
 
 .form-group select {
-  width: 100%;
+  width: 60%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -92,7 +99,69 @@ justify-content: space-between;
   display: flex;
  flex-direction: column;
   }
-/* .lado-esquerdo{
+
+.documentacao{
+  cursor: pointer;
+  color: #0275d8;
+  font-weight: 600;
+  
+  text-decoration: underline #0275d8 2px;
+}
+.documentacao:hover{
+  color: green;
+  text-decoration: underline green 2px;
+}
+
+/* Botões de paginação */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pagination button:hover {
+  background: #0056b3;
+}
+
+.pagination button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+
+@media (max-width: 768px) {
+  
+.processos-container{
+
+flex-direction: column;
+display: flex;
+align-items: center;
+} 
+.processo-card{
+  width: 90%;
+  margin-bottom: 0;
+}
+.detalhes{
   display: flex;
   flex-direction: column;
-} */
+}
+h2,p{
+  margin-bottom: 5px;
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+}
+}

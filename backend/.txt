@@ -20,4 +20,7 @@ Body -corpo
 
 enviar token no postman vai em autenticação (Auth)
 type= bearer-token
-
+//criando migration
+//npx sequelize-cli migration:generate --name create-areas-table
+// atualizando migration
+npx sequelize-cli migration:generate --name add-areaId-to-processes

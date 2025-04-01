@@ -1,38 +1,53 @@
-import { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
+
 import api from "../services/api";
+import { toast } from "react-toastify";
 
+export const AuthContext = createContext({});
+export default function AuthProvider({ children }) {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    if (token) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      setUser(user);
+    }
+  }, [token]);
 
+  const login = async (email, password) => {
+    try {
+      const res = await api.post("/login", { email, password });
+      setUser(res.data.users);
+      setToken(res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.users));
+      localStorage.setItem("token", res.data.token);
+      api.defaults.headers.Authorization = `Bearer ${res.data.token}`;
 
-export const AuthContext = createContext({})
-export default function AuthProvider({children}) {
-const [token,setToken]=useState(localStorage.getItem("token"))
-const [user,setUser]=useState(localStorage.getItem("user"))
-const navigate = useNavigate();
-const login=(token)=>{
+      console.log("login", res.data);
+    } catch (err) {
+      toast.error(err.response.data.message);
+      console.error("Login error:", err);
+    }
+  };
+  const logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    api.defaults.headers.Authorization = null;
 
-  localStorage.setItem('token',token)
-  setToken(token)
-
-}
-const logout=()=>{
-  api.defaults.headers.Authorization=null
-   setToken(null)
-  localStorage.removeItem('token')
-   navigate("/login")
-}
-return (
-      <AuthContext.Provider value={{user,setUser,token,login,logout}}>
+    setUser(null);
+    setToken(null);
+  };
+  return (
+    <AuthContext.Provider
+      value={{
+        token,
+        user,
+        login,
+        logout,
+      }}
+    >
       {children}
-      </AuthContext.Provider>
-
-
-   )
- }
-
-
-
-
-
-
+    </AuthContext.Provider>
+  );
+}

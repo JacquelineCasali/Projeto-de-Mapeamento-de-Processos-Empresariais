@@ -34,9 +34,8 @@ const processo = sequelize.define("Processo", {
   documentacao: {
     type: DataTypes.STRING,
   },
-  // documentos: {
-  //   type: DataTypes.JSON, // Armazena um array de nomes de arquivos
-  // },
+
+
 });
 area.hasMany(processo,{ foreignKey: "areaId",onDelete: "CASCADE",onUpdate:'CASCADE' })
 processo.belongsTo(area, { foreignKey: "areaId",onDelete: "CASCADE",onUpdate:'CASCADE' });

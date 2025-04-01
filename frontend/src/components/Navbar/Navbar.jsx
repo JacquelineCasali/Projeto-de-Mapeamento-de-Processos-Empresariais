@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 import { FiChevronDown } from "react-icons/fi";
 import { FaBars } from "react-icons/fa";
 
+
 export default function Navbar() {
-  const { logout } = useContext(AuthContext);
+  const { user,logout } = useContext(AuthContext);
   const [menuAberto, setMenuAberto] = useState(false);
   const [dropdown, setDropdown] = useState(null); // Controla dropdowns abertos
-
+ 
   // Fecha dropdown ao clicar fora
   useEffect(() => {
     const fecharDropdown = (e) => {
@@ -20,17 +21,19 @@ export default function Navbar() {
     return () => document.removeEventListener("click", fecharDropdown);
   }, []);
 
+
+
+  
   return (
     <header className="header">
       <nav className="nav-bar">
         <h2
         className="nav-h2">Gestão de Processo</h2>
-       
-        <FaBars size={20} style={{ color: "black"}}
-        className="menu-btn" onClick={() => setMenuAberto(!menuAberto)} />
-      
+   
 
         <ul className={`nav-links ${menuAberto ? "nav-active" : ""}`}>
+
+   
           <li className="dropdown">
             <Link to="area" className="link">
               Área
@@ -100,11 +103,22 @@ export default function Navbar() {
               </ul>
          
           </li>
+          
         </ul>
+    {/* botao responsivo */}
+   
 
+
+    
+    <FaBars size={20} style={{ color: "black"}}
+        className="menu-btn" onClick={() => setMenuAberto(!menuAberto)} />
+<div>
+<strong>{user?.nome}</strong>
   <button className="logout" style={{ width: "80px" }} onClick={logout}>
   Sair
 </button>
+</div>
+
 
       
       </nav>

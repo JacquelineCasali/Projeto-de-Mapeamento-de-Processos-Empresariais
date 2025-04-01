@@ -4,26 +4,27 @@ import { Link, useNavigate } from "react-router-dom";
 
 import Title from "../Title/Tlite";
 import "./login.css";
-import api from "../../services/api";
+
 import { AuthContext } from "../../context/AuthContext";
-import { toast } from "react-toastify"
+
 import Button from "../Button/Button";
 import { Head } from "../Head/Head";
+
+import { toast } from "react-toastify";
 export default function Login() {
   //mostrar a senha
   const [isShow, setIsShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-
-const auth=useContext(AuthContext)
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/login", { email, password });
-   auth.login(response.data.token)
+      e.preventDefault();
+      await login(email, password);
    navigate("/")
    
   } catch (err) {

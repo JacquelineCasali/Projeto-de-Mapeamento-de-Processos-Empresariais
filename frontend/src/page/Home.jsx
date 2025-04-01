@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from "react-router-dom";
 import Navbar from '../components/Navbar/Navbar';
+import VisualizarPDF from '../components/PdfViewerServer/VisualizarPDF';
 
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
      
      <Outlet/>
      </section>
+  
     </>
   )
 }

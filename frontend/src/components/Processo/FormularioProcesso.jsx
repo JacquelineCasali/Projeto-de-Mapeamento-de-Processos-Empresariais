@@ -23,15 +23,19 @@ const FormularioProcesso = () => {
     ferramentas:"",
     documentacao:""
   });
+
+
+
   useEffect(() => {
     //  banco de dados
 //     //criando objeto com os dados
 
     try {
       api.get(`/processo/` + id, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}`
-     
-        },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          'Content-Type':'multipart/form-data',
+         }
         })
         .then((res) => {
           setValues(res.data);
@@ -144,21 +148,16 @@ const FormularioProcesso = () => {
  onChange={(e) => setValues({ ...values, ferramentas: e.target.value })}
 />
 
-<div>
+
+
 <input type="file"
  className="form-control  text-secondary"
  placeholder="Responsáveis"
+
  onChange={(e) => setValues({ ...values, documentacao: e.target.files[0] })}
 />
-<p>{values.documentacao}</p> 
-</div>
 
-{/* <input type="file"
- className="form-control  text-secondary"
- placeholder="Responsáveis"
-
- onChange={(e) => setValues({ ...values, documentacao: e.target.files[0] })}
-/> */}
+{id>0 ?<p>{values.documentacao}</p> :""}
 
    <Button text={id ? "Editar" : "Cadastrar"} theme={"roxo"}
    type="submit" />

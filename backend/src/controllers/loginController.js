@@ -20,7 +20,8 @@ const loginController = {
     const { id } = users;
     //expiresIn:300 expira em 5 minutos
     const token = jwt.sign(
-      { id },
+      { id 
+      },
 
       process.env.APP_SECRET,
       { expiresIn: "1d" }
@@ -34,6 +35,7 @@ const loginController = {
       users: {
         id,
         email,
+        nome:users.nome
       },
       token,
       message: "Logado com sucesso",

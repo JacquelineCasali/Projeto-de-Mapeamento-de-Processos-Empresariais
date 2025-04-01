@@ -7,6 +7,7 @@ const ValidateToken = require("../middlewares/token");
 const dashboardController = require("../controllers/dashboardController");
 const processoController = require("../controllers/processoController");
 const upload = require("../middlewares/upload");
+const pdfController = require("../controllers/pdfController");
 const downloadController = require("../controllers/downloadController");
 
 const router = express.Router();
@@ -26,7 +27,7 @@ router.delete("/area/:id", ValidateToken,areaController.delete);
 
 router.post("/processo",ValidateToken,upload.single('documentacao'), processoController.create);
 router.get("/processo", ValidateToken,processoController.listar);
-router.get("/processo/:id",ValidateToken, processoController.ler);
+router.get("/processo/:id/pdf",ValidateToken, processoController.ler);
 router.put("/processo/:id",ValidateToken, upload.single('documentacao'),processoController.update);
 router.delete("/processo/:id", ValidateToken,processoController.delete);
 router.post("/subprocesso",ValidateToken, subprocessoController.create);
@@ -37,6 +38,7 @@ router.delete("/subprocesso/:id", ValidateToken,subprocessoController.delete);
 
 
 router.get("/dashboard",dashboardController.listar)
+router.get('/:processoId/pdf', pdfController.ler)
 router.get("/download/:filename", downloadController.ler);
 
 module.exports=router;
