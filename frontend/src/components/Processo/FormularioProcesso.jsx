@@ -157,7 +157,7 @@ const FormularioProcesso = () => {
  onChange={(e) => setValues({ ...values, documentacao: e.target.files[0] })}
 />
 
-{id>0 ?<p>{values.documentacao}</p> :""}
+
 
    <Button text={id ? "Editar" : "Cadastrar"} theme={"roxo"}
    type="submit" />

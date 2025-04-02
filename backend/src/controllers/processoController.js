@@ -55,29 +55,43 @@ const processoController = {
       res.status(500).json({ error: "Erro ao buscar processos" });
     }
   },
-  //filtar por processo
+  
+ //filtar por processo
+ async lerProcesso(req, res) {
+  try {
+    const { id } = req.params;
+      const users = await processo.findOne({ where: { id },include:subprocesso ,include:area});
+    // caso nao encotre o usuario
+    if (!users) {
+      return res.status(404).json({ message: "Processo não encontrado" });
+    }
+  return res.status(200).json(users);
+
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+}, 
+
+
+
+//ler pdf
+
   async ler(req, res) {
-    
     try {
       const { id } = req.params;
-      const users = await processo.findByPk( id )
-     
-      
+      const users = await processo.findByPk(id);
+
       // caso nao encotre o usuario
       if (!users) {
         return res.status(404).json({ message: "Processo não encontrado" });
       }
-      const filePath = path.join(__dirname, '../../uploads', req.file.filename);
+      const filePath = path.join(__dirname, "../../uploads", req.file.filename);
       res.sendFile(filePath);
 
-     return res.status(200).json(users);
+      return res.status(200).json(users);
     } catch (err) {
       return res.status(400).send(err);
     }
-
-
-
-
   },
   async update(req, res) {
     try {
@@ -104,12 +118,9 @@ const processoController = {
         });
       }
     } catch (err) {
-      return res
-        .status(500)
-        .json({
-          message: `Area não cadastrado, Cadastre uma área`,
-          err: err.parent.sqlMessage,
-        });
+      return res.status(500).json({
+        message: `Area não cadastrado, Cadastre uma área`,
+             });
     }
   },
 
