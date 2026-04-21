@@ -1,94 +1,151 @@
-## 📌 Projeto de Mapeamento de Processos Empresariais
+# 🏢 Sistema de Mapeamento de Processos Empresariais (Full Stack)
 
-## 📝 Sobre o Projeto
+Aplicação Full Stack desenvolvida para gerenciamento de processos empresariais, permitindo organizar áreas, processos, subprocessos e usuários.
 
-Este projeto é uma aplicação full-stack para o mapeamento de processos empresariais, permitindo gerenciar áreas, processos, subprocessos e usuários. Inclui um sistema de autenticação, além de suporte a upload e visualização de arquivos.
+O sistema inclui autenticação, controle de acesso e upload de arquivos, simulando cenários reais de gestão corporativa.
 
-## Vídeo do Projeto 
+## 🎥 Demonstração do Projeto 
+
 https://github.com/user-attachments/assets/ad14cd49-8d44-43b9-aff0-bc3a193b3c55
 
+## 🚀 Tecnologias
 
-## 🚀 Tecnologias Utilizadas
+### 🔙 Backend
+- Node.js
+- Express.js
+- Sequelize (ORM)
+- MySQL
+- JWT (autenticação)
 
-Back-end (Node.js, Express, Sequelize, MySQL)
-Node.js: Plataforma para execução do JavaScript no servidor.
-Express.js: Framework para construção da API.
-Sequelize: ORM para modelagem e manipulação do banco de dados.
-MySQL: Banco de dados relacional para armazenar as informações.
-Front-end (React.js, Context API)
-React.js: Biblioteca para construção da interface do usuário.
-Context API: Gerenciamento de estado global para autenticação e dados compartilhados.
-Axios: Comunicação com a API.
-CSS Puro: Estilização personalizada da interface.
+### 🎨 Frontend
+- React.js
+- Context API (gerenciamento de estado)
+- Axios (consumo de API)
+- CSS
+
+---
 
 ## ⚙️ Funcionalidades
 
-🔹 Gestão de Áreas
+### 📁 Gestão de Áreas
 
-✅ Criar, listar e excluir áreas
+- [x] Criar áreas
+- [x] Listar áreas
+- [x] Excluir áreas
 
-🔹 Gestão de Processos e Subprocessos
+### 🔄 Gestão de Processos e Subprocessos
 
-✅ Criar, listar, filtrar por área e excluir processos
+- [x] Criar processos
+- [x] Listar processos
+- [x] Filtrar por área
+- [x] Excluir processos
+- [x] Relacionar subprocessos a processos
+- [x] Paginação e busca por nome
 
-✅ Relacionar subprocessos a um processo específico
+### 📎 Upload e Visualização de Arquivos
 
-✅ Paginação e busca por nome de processos
+- [x] Upload de documentos (PDF, DOC, JPG)
+- [x] Visualização de arquivos na aplicação
 
-🔹 Upload e Download de Arquivos
+### 🔐 Autenticação
 
-✅ Upload de documentos vinculados a um processo (PDF, DOC, JPG)
+- [x] Login e logout
+- [x] Proteção de rotas
+- [x] Exibição do usuário autenticado
 
-✅ Visualização de PDFs diretamente na aplicação
+---
 
-🔹 Autenticação e Login
+## 📌 Regras de Negócio
 
-✅ Login e logout com Context API
+- Controle de acesso baseado em autenticação
+- Associação entre áreas, processos e subprocessos
+- Organização hierárquica de dados
+- Gerenciamento de arquivos vinculados aos processos
 
-✅ Proteção de rotas baseadas em autenticação
+---
 
-✅ Exibição do nome do usuário na navbar
+## 🧠 Arquitetura
 
-## 📌 Como Rodar o Projeto
+### Backend
 
-1️⃣ Clonar o repositório
-$ https://github.com/JacquelineCasali/Teste-Stage-Consulting
+- API REST com Express
+- ORM com Sequelize
+- Separação por camadas (controllers, services, models)
+- Autenticação com JWT
 
+### Frontend
+
+- Componentização com React
+- Gerenciamento de estado com Context API
+- Consumo de API via Axios
+- Proteção de rotas
+
+---
+
+## ▶️ Como executar o projeto
+
+### 📌 1. Clonar repositório
+
+```bash
+git clone https://github.com/JacquelineCasali/Teste-Stage-Consulting
 cd Teste-Stage-Consulting
+```
+### 📌 2. Configurar banco de dados
 
-2️⃣ Configurar o Banco de Dados
-Crie um banco de dados MySQL e configure o arquivo .env com:
+Crie um banco MySQL e configure o .env:
 
-- DB_HOST=localhost
-- DB_USER=root
-- DB_PASSWORD=senha
-- DB_NAME=nome_do_banco
-- JWT_SECRET=sua_chave_secreta
+```bash
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=senha
+DB_NAME=nome_do_banco
+JWT_SECRET=sua_chave_secreta
+```
 
-3️⃣ Instalar Dependências
+### 📌 3. Instalar dependências
 
-Back-end
-- $ cd backend
-- $ npm install
+#### Backend
+```bash
+cd backend
+npm install
+```
+#### Frontend
+```bash
+cd frontend
+npm install
+```
+### 📌 4. Executar aplicação
 
-Front-end
-- $ cd frontend
-- $ npm install
+#### Backend
+```bash
+npm run dev
+```
+#### Frontend
+```bash
+cd frontend
 
-## 4️⃣ Executar o Projeto
-Rodar o servidor (Node.js + Express + MySQL)
+npm run dev
+```
 
-✅ $ cd backend
+🔗 Frontend: http://localhost:5173
 
-✅ $ npm run dev
+🔗 Backend: http://localhost:3000
 
-Rodar o front-end (React.js)
+### 📌 Diferenciais do Projeto
 
-✅ $ cd frontend
+- [x]  Sistema completo de gestão empresarial
+- [x]  Implementação de autenticação com JWT
+- [x]  Upload e visualização de arquivos
+- [x]  Organização hierárquica de processos
+- [x]  Paginação e filtros
+- [x]  Integração completa entre frontend e backend
 
-✅ $ npm run dev
+### 👩‍💻 Autora
 
-É necessário deixar o backend rodando no terminal para que os dados sejam visualizados no projeto.
-
-## 📝 Projeto Desenvolvido por 
 Jacqueline Casali
+
+🔗 LinkedIn: https://www.linkedin.com/in/jaquelinecasali/
+
+🔗 GitHub: https://github.com/JacquelineCasali
+
+🌐 Portfólio: https://casali.vercel.app
